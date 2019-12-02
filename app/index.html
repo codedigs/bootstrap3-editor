@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" />
+    <style type="text/css">
+        .show-grid[class^=col-] {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #eee;
+            background-color: rgba(86,61,124,.15);
+            border: 1px solid #ddd;
+            border: 1px solid rgba(86,61,124,.2);
+        }
+
+        .playground {
+            border: 1px solid black;
+            margin: 15px 0;
+        }
+
+        .editor {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8">
+                <div id="playground" class="playground"></div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="editor">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">Bootstrap 3 Editor</div>
+                        </div>
+                        <div class="panel-body">
+                            <div role="tabpanel">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#grid" aria-controls="grid" role="tab" data-toggle="tab">grid</a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="grid">...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./lib/jquery-3.4.1/jquery.js"></script>
+    <script type="text/javascript" src="./lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+</body>
+</html>
