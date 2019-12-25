@@ -14,5 +14,5 @@ gulp.task('serve', function () {
         }
     });
 
-    gulp.watch(["./app/*.html", "./app/*.js"]).on("change", reload);
+    gulp.watch(["./app/*.html", "./app/*.js", "./app/*.css"]).on("change", reload);
 });

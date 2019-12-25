@@ -1,0 +1,36 @@
+.show-grid[class^=col-] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eee;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86,61,124,.2);
+}
+
+.playground {
+    border: 1px solid black;
+    margin: 15px 0;
+}
+
+.editor {
+    margin: 15px 0;
+}
+
+/* overwrite bootstrap 3 */
+.editor .btn,
+.editor .panel {
+    border-radius: 0 !important;
+}
+
+.editor .panel-group .panel+.panel {
+    margin-top: 0;
+    border-top: 0;
+}
+
+.editor .panel-heading {
+    padding: 5px 7.5px;
+}
+
+.editor .panel-body {
+    padding: 5px;
+}

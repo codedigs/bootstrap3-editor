@@ -5,25 +5,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" />
-    <style type="text/css">
-        .show-grid[class^=col-] {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            background-color: #eee;
-            background-color: rgba(86,61,124,.15);
-            border: 1px solid #ddd;
-            border: 1px solid rgba(86,61,124,.2);
-        }
-
-        .playground {
-            border: 1px solid black;
-            margin: 15px 0;
-        }
-
-        .editor {
-            margin: 15px 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./app.css" />
 </head>
 <body>
     <div class="container-fluid">
@@ -39,17 +21,56 @@
                             <div class="panel-title">Bootstrap 3 Editor</div>
                         </div>
                         <div class="panel-body">
-                            <div role="tabpanel">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#grid" aria-controls="grid" role="tab" data-toggle="tab">grid</a>
-                                    </li>
-                                </ul>
+                            <button class="btn btn-primary btn-xs">
+                                <span class="glyphicon glyphicon-plus"></span> Add Layer
+                            </button>
 
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="grid">...</div>
+                            <!-- <div class="panel-group" id="bs3-ed-layers" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer1" aria-expanded="true" aria-controls="bs3-ed-layer1">
+                                                Layer 1
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="bs3-ed-layer1" class="panel-collapse collapse in" role="tabpanel">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer2" aria-expanded="false" aria-controls="bs3-ed-layer2">
+                                                Layer 2
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="bs3-ed-layer2" class="panel-collapse collapse" role="tabpanel">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer3" aria-expanded="false" aria-controls="bs3-ed-layer3">
+                                                Layer 3
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="bs3-ed-layer3" class="panel-collapse collapse" role="tabpanel">
+                                        <div class="panel-body">
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
