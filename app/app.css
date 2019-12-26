@@ -22,15 +22,54 @@
     border-radius: 0 !important;
 }
 
+.editor .btn:focus {
+    outline: none;
+}
+
 .editor .panel-group .panel+.panel {
     margin-top: 0;
-    border-top: 0;
+    border-top: 1px solid #ccc;
 }
 
 .editor .panel-heading {
     padding: 5px 7.5px;
+    border-radius: 0;
 }
 
 .editor .panel-body {
     padding: 5px;
 }
+
+.editor .panel-layers {
+    border: 1px solid #ccc;
+}
+
+.editor .panel-layers .panel {
+    border: 0;
+}
+
+.editor .panel-layers .panel-heading a span {
+    transition: 0.3s;
+}
+
+.editor .panel-layers .panel-heading a span.hover  {
+    transform: rotate(90deg);
+}
+
+.editor .panel-layers .panel-heading a span.active  {
+    transform: rotate(180deg);
+}
+
+.editor .panel-layers .panel-heading a {
+    text-decoration: none;
+    /*transition: 0.3s;*/
+}
+
+/*.editor .panel-layers .panel-heading a:not(.collapsed),
+.editor .panel-layers .panel-heading a:hover {
+    margin-left: 5px;
+}
+
+.editor .panel-layers .panel-heading a.collapsed {
+    margin-left: 0;
+}*/
