@@ -12,8 +12,26 @@
     margin: 15px 0;
 }
 
-.editor {
-    margin: 15px 0;
+.editor.overlay {
+    width: calc(33.33% - 30px);
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+}
+
+.move-tool {
+    position: absolute;
+    top: -31px;
+    color: #337ab7;
+    font-size: 30px;
+    left: 50%;
+    border: 1px solid #337ab7; /* bootstrap 3 primary color */
+    border-bottom: none;
+    transform: translateX(-50%);
 }
 
 /* overwrite bootstrap 3 */

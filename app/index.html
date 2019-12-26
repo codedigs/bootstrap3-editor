@@ -5,6 +5,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./helper.css" />
     <link rel="stylesheet" type="text/css" href="./app.css" />
 </head>
 <body>
@@ -15,44 +16,53 @@
             </div>
 
             <div class="col-xs-4">
-                <div class="editor">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="panel-title">Bootstrap 3 Editor</div>
-                        </div>
-                        <div class="panel-body">
-                            <button class="btn btn-primary btn-xs" id="add-layer">
-                                <span class="glyphicon glyphicon-plus"></span> Add Layer
-                            </button>
+                <div class="margin-top margin-right">
+                    <div class="editor" id="bs3-editor">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-move move-tool" style="display: none"></span>
 
-                            <div class="panel-group panel-layers" id="bs3-ed-layers" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab">
-                                        <h4 class="panel-title">
+                                <div class="checkbox pull-right no-margin-top">
+                                    <label class="cursor-pointer no-select">
+                                        <input type="checkbox" name="overlay" /> Overlay
+                                    </label>
+                                </div>
+                                <h1 class="panel-title no-select">Bootstrap 3 Editor</h1>
+                            </div>
+                            <div class="panel-body">
+                                <button class="btn btn-primary btn-xs" id="add-layer">
+                                    <span class="glyphicon glyphicon-plus"></span> Add Layer
+                                </button>
 
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer1" aria-expanded="true" aria-controls="bs3-ed-layer1">
-                                                <span class="glyphicon glyphicon-chevron-up"></span> Layer 1
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="bs3-ed-layer1" class="panel-collapse collapse" role="tabpanel">
-                                        <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                <div class="panel-group panel-layers" id="bs3-ed-layers" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab">
+                                            <h4 class="panel-title">
+
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer1" aria-expanded="true" aria-controls="bs3-ed-layer1">
+                                                    <span class="glyphicon glyphicon-chevron-up"></span> Layer 1
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="bs3-ed-layer1" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab">
-                                        <h4 class="panel-title">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer2" aria-expanded="false" aria-controls="bs3-ed-layer2">
-                                                <span class="glyphicon glyphicon-chevron-up cursor-pointer"></span> Layer 2
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="bs3-ed-layer2" class="panel-collapse collapse" role="tabpanel">
-                                        <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer2" aria-expanded="false" aria-controls="bs3-ed-layer2">
+                                                    <span class="glyphicon glyphicon-chevron-up cursor-pointer"></span> Layer 2
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="bs3-ed-layer2" class="panel-collapse collapse" role="tabpanel">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
