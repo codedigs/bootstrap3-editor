@@ -19,6 +19,10 @@
     z-index: 1;
 }
 
+.editor .layer-buttons {
+    margin-top: -3px;
+}
+
 .overlay {
     position: absolute;
 }

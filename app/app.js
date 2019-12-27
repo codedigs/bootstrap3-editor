@@ -6,6 +6,7 @@ var App = (function() {
     $('#bs3-editor :input[name="overlay"]').click(Overlay.onClick);
 
     $('#add-layer').click(Layer.onAdd);
+    $('#bs3-ed-layers').on("click", ".delete-layer", Layer.onDeleteLayer);
 
     $('#bs3-ed-layers .panel-title')
       .on("mouseenter", "a", Layer.onMouseIn)
@@ -132,13 +133,55 @@ var App = (function() {
       }, Layer.TRANSITION, function() {
         $(this).html('<span class="glyphicon glyphicon-plus"></span>');
         $(this).prop("disabled", false);
-      });
 
-      console.log('add layer');
+        var tmpl = _.template($('#layer-item-tmpl').html());
+
+        var layers_len = $('#bs3-ed-layers .layer-item:visible').length;
+
+        $('#bs3-ed-layers').append(tmpl({
+          layer_name: "Layer " + (layers_len+1),
+          layer_id: "bs3-ed-layer" + (layers_len+1),
+          layer_content: "Lorem ipsum"
+        }));
+
+        var isLayerVisible = $('#bs3-ed-layers:visible').length > 0;
+
+        if (!isLayerVisible) {
+          $('#bs3-ed-layers').show();
+        }
+
+        console.log('add layer');
+      });
     },
 
     onDeleteLayer: function() {
+      var _this = this;
+      $(this).prop("disabled", true);
 
+      var layer_name = $(this).data("layer-name");
+
+      smkConfirm("Do you want to delete layer " + layer_name, function(isYes) {
+        $(_this).prop("disabled", false);
+
+        if (isYes) {
+          $(_this).closest('.layer-item').fadeOut(function() {
+            this.remove();
+
+            if ($('#bs3-ed-layers .layer-item:visible').length < 1) {
+              $('#add-layer').prop("disabled", true);
+
+              $('#add-layer').animate({
+                width: 82
+              }, Layer.TRANSITION, function() {
+                $('#add-layer').html('<span class="glyphicon glyphicon-plus"></span> Add Layer');
+                $('#add-layer').prop("disabled", false);
+              });
+
+              $('#bs3-ed-layers').hide();
+            }
+          });
+        }
+      });
     },
 
     onSelect: function() {
