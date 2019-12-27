@@ -32,6 +32,7 @@
     border: 1px solid #337ab7; /* bootstrap 3 primary color */
     border-bottom: none;
     transform: translateX(-50%);
+    cursor: move;
 }
 
 /* overwrite bootstrap 3 */

@@ -15,10 +15,10 @@ var App = (function() {
   };
 
   var DragEvent = {
-    cursorOrigin: {
+    initialCursorCoor: {
       x: 0, y: 0
     },
-    objectOrigin: {
+    initialEditorCoor: {
       x: 0, y: 0
     },
     readyToDrag: false,
@@ -29,56 +29,46 @@ var App = (function() {
       var moveToolHeight = $('#bs3-editor .panel-heading .move-tool').height();
 
       var moveToolPos = {
-          pt1: {
-              x: moveTooloffset.left,
-              y: moveTooloffset.top
+          pt: {
+            x: moveTooloffset.left,
+            y: moveTooloffset.top
           },
-          pt2: {},
-          pt3: {},
-          pt4: {}
+          w: moveToolWidth,
+          h: moveToolHeight
       };
 
-      moveToolPos.pt2.x = moveToolPos.pt1.x + moveToolWidth;
-      moveToolPos.pt2.y = moveToolPos.pt1.y;
-      moveToolPos.pt3.x = moveToolPos.pt1.x;
-      moveToolPos.pt3.y = moveToolPos.pt1.y + moveToolHeight;
-      moveToolPos.pt4.x = moveToolPos.pt1.x + moveToolWidth;
-      moveToolPos.pt4.y = moveToolPos.pt1.y + moveToolHeight;
-
-      console.log(moveToolPos);
-
-      if (
-        (e.pageX > moveToolPos.pt1.x && e.pageY > moveToolPos.pt1.y) &&
-        (e.pageX > moveToolPos.pt1.x && e.pageY > moveToolPos.pt1.y) &&
-        (e.pageX > moveToolPos.pt1.x && e.pageY > moveToolPos.pt1.y) &&
-        (e.pageX > moveToolPos.pt1.x && e.pageY > moveToolPos.pt1.y)
-      )
-
-      DragEvent.readyToDrag = true;
-      DragEvent.cursorOrigin = {
-        x: e.pageX,
-        y: e.pageY
+      var cursorPos = {
+        pt: {
+          x: e.pageX,
+          y: e.pageY
+        },
+        w: 15,
+        h: 15
       };
 
-      var offset = $('#bs3-editor').offset();
-      DragEvent.objectOrigin = {
-        x: offset.left,
-        y: offset.top
-      };
+      if (is_collided(moveToolPos, cursorPos)) {
+        DragEvent.readyToDrag = true;
+        DragEvent.initialCursorCoor = {
+          x: e.pageX,
+          y: e.pageY
+        };
 
-      $('#bs3-editor .panel-heading .move-tool').css('cursor', "move");
+        var offset = $('#bs3-editor').offset();
+        DragEvent.initialEditorCoor = {
+          x: offset.left,
+          y: offset.top
+        };
+      }
     },
 
     onDragging: function(e) {
       if (DragEvent.readyToDrag) {
-        console.log({x: e.pageX, y: e.pageY});
-
-        var top = e.pageY - DragEvent.cursorOrigin.y;
-        var left = e.pageX - DragEvent.cursorOrigin.x;
+        var top = e.pageY - DragEvent.initialCursorCoor.y;
+        var left = e.pageX - DragEvent.initialCursorCoor.x;
 
         $('#bs3-editor').css({
-          top: DragEvent.objectOrigin.y + top,
-          left: DragEvent.objectOrigin.x + left
+          top: DragEvent.initialEditorCoor.y + top,
+          left: DragEvent.initialEditorCoor.x + left
         });
 
         console.log("dragging!!!");
@@ -87,8 +77,6 @@ var App = (function() {
 
     onStopToDrag: function() {
       DragEvent.readyToDrag = false;
-
-      $('#bs3-editor .panel-heading').css('cursor', "default");
     }
   };
 
