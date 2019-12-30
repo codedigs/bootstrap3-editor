@@ -90,7 +90,6 @@ var Bs3Editor;
 
     var Overlay = {
       onClick: function() {
-        console.log($(this).is(":checked"));
         var is_overlay = $(this).is(":checked");
 
         if (is_overlay) {
@@ -100,7 +99,7 @@ var Bs3Editor;
             .parent()
             .parent().removeClass("col-xs-4");
 
-          $(window)
+          $('.panel-heading .move-tool', editorEl)
             .mousedown(DragEvent.onReadyToDrag)
             .mousemove(DragEvent.onDragging)
             .on("mouseup mouseleave", DragEvent.onStopToDrag);
