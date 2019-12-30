@@ -12,14 +12,14 @@ var Bs3Editor;
     var init = function() {
       $(':input[name="overlay"]', editorEl).click(Overlay.onClick);
 
-      $('.add-layer', editorEl).click(Layer.onAdd);
+      $('.add-layer').click(Layer.onAdd);
       layerEl.on("click", ".delete-layer", Layer.onDelete);
 
-      $('.panel-title', layerEl)
-        .on("mouseenter", "a", Layer.onMouseIn)
-        .on("mouseleave", "a", Layer.onMouseOut);
+      layerEl
+        .on("mouseenter", ".layer-item a", Layer.onMouseIn)
+        .on("mouseleave", ".layer-item a", Layer.onMouseOut);
 
-      $('.panel-title', layerEl).on("click", "a", Layer.onSelect);
+      layerEl.on("click", ".layer-item a", Layer.onSelect);
     };
 
     var DragEvent = {
@@ -213,7 +213,6 @@ var Bs3Editor;
           }
         };
 
-        // before(during(after));
         before();
       },
 
