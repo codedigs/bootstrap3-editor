@@ -38,35 +38,86 @@
                                 <div class="panel-group panel-layers" id="bs3-ed-layers" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default layer-item">
                                         <div class="panel-heading" role="tab">
-                                            <div class="pull-right layer-buttons">
+                                            <div class="pull-right layer-button">
                                                 <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 1">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
 
                                             <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer1" aria-expanded="true" aria-controls="bs3-ed-layer1">
-                                                    <span class="glyphicon glyphicon-chevron-up"></span> Layer 1
+                                                <a class="layer-item-btn" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer1" aria-expanded="true" aria-controls="bs3-ed-layer1">
+                                                    <span class="glyphicon glyphicon-chevron-up active"></span> Layer 1
                                                 </a>
                                             </h4>
                                         </div>
-                                        <div id="bs3-ed-layer1" class="panel-collapse collapse" role="tabpanel">
+                                        <div id="bs3-ed-layer1" class="panel-collapse collapse in" role="tabpanel">
                                             <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                <div class="btn-group container-choices" data-toggle="buttons">
+                                                    <label class="btn btn-default btn-xs active" data-toggle="tooltip" title="container">
+                                                        <input type="radio" name="container" autocomplete="off" /> fixed
+                                                    </label>
+                                                    <label class="btn btn-default btn-xs" data-toggle="tooltip" title="container-fluid">
+                                                        <input type="radio" name="container" autocomplete="off" /> full
+                                                    </label>
+                                                </div>
+
+                                                <div class="panel-group panel-rows" id="layer1-rows" role="tablist" aria-multiselectable="true">
+                                                    <div class="panel panel-default row-item">
+                                                        <div class="panel-heading" role="tab">
+                                                            <div class="pull-right row-button">
+                                                                <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 1">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                </button>
+                                                            </div>
+
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#layer1-rows" href="#layer1-row1" aria-expanded="true" aria-controls="layer1-row1">
+                                                                    <span class="glyphicon glyphicon-chevron-up active"></span> Row 1
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="layer1-row1" class="panel-collapse collapse in" role="tabpanel">
+                                                            <div class="panel-body">
+                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="panel panel-default row-item">
+                                                        <div class="panel-heading" role="tab">
+                                                            <div class="pull-right row-button">
+                                                                <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 1">
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                </button>
+                                                            </div>
+
+                                                            <h4 class="panel-title">
+                                                                <a class="collapsed" data-toggle="collapse" data-parent="#layer1-rows" href="#layer1-row2" aria-expanded="false" aria-controls="layer1-row2">
+                                                                    <span class="glyphicon glyphicon-chevron-up"></span> Row 2
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="layer1-row2" class="panel-collapse collapse" role="tabpanel">
+                                                            <div class="panel-body">
+                                                                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="panel panel-default layer-item">
                                         <div class="panel-heading" role="tab">
-                                            <div class="pull-right layer-buttons">
+                                            <div class="pull-right layer-button">
                                                 <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 2">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
 
                                             <h4 class="panel-title">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer2" aria-expanded="false" aria-controls="bs3-ed-layer2">
+                                                <a class="collapsed layer-item-btn" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#bs3-ed-layer2" aria-expanded="false" aria-controls="bs3-ed-layer2">
                                                     <span class="glyphicon glyphicon-chevron-up cursor-pointer"></span> Layer 2
                                                 </a>
                                             </h4>
@@ -98,7 +149,7 @@
     <script type="text/template" id="layer-item-tmpl">
         <div class="panel panel-default layer-item">
             <div class="panel-heading" role="tab">
-                <div class="pull-right layer-buttons">
+                <div class="pull-right layer-button">
                     <button class="btn btn-danger btn-xs delete-layer" data-layer-name="<%= layer_name %>">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>

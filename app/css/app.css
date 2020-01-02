@@ -19,8 +19,14 @@
     z-index: 1;
 }
 
-.editor .layer-buttons {
-    margin-top: -3px;
+.editor .layer-button,
+.editor .row-button {
+    margin-top: -5px;
+}
+
+.editor .layer-button .btn,
+.editor .row-button .btn {
+    font-size: 0.7em;
 }
 
 .overlay {
@@ -45,8 +51,9 @@
     border-radius: 0 !important;
 }
 
-.editor .btn:focus {
-    outline: none;
+.editor .btn:focus,
+.editor .btn.focus {
+    outline: none !important;
 }
 
 .editor .panel-group .panel+.panel {
@@ -63,36 +70,38 @@
     padding: 5px;
 }
 
-.editor .panel-layers {
+.editor .panel-layers,
+.editor .panel-rows {
     border: 1px solid #ccc;
 }
 
-.editor .panel-layers .panel {
+.editor .panel-layers .panel,
+.editor .panel-rows .panel {
     border: 0;
 }
 
-.editor .panel-layers .panel-heading a span {
+.editor .panel-layers .panel-heading .panel-title,
+.editor .panel-rows .panel-heading .panel-title {
+    font-size: 0.8em;
+}
+
+.editor .panel-layers .panel-heading a span,
+.editor .panel-rows .panel-heading a span {
     transition: 0.3s;
 }
 
-.editor .panel-layers .panel-heading a span.hover  {
+.editor .panel-layers .panel-heading a span.hover ,
+.editor .panel-rows .panel-heading a span.hover  {
     transform: rotate(90deg);
 }
 
-.editor .panel-layers .panel-heading a span.active  {
+.editor .panel-layers .panel-heading a span.active ,
+.editor .panel-rows .panel-heading a span.active  {
     transform: rotate(180deg);
 }
 
-.editor .panel-layers .panel-heading a {
+.editor .panel-layers .panel-heading a,
+.editor .panel-rows .panel-heading a {
     text-decoration: none;
     /*transition: 0.3s;*/
 }
-
-/*.editor .panel-layers .panel-heading a:not(.collapsed),
-.editor .panel-layers .panel-heading a:hover {
-    margin-left: 5px;
-}
-
-.editor .panel-layers .panel-heading a.collapsed {
-    margin-left: 0;
-}*/

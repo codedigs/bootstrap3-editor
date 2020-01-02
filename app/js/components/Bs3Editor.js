@@ -11,15 +11,7 @@ var Bs3Editor;
 
     var init = function() {
       $(':input[name="overlay"]', editorEl).click(Overlay.onClick);
-
-      $('.add-layer').click(Layer.onAdd);
-      layerEl.on("click", ".delete-layer", Layer.onDelete);
-
-      layerEl
-        .on("mouseenter", ".layer-item a", Layer.onMouseIn)
-        .on("mouseleave", ".layer-item a", Layer.onMouseOut);
-
-      layerEl.on("click", ".layer-item a", Layer.onSelect);
+      Layer.init();
     };
 
     var DragEvent = {
@@ -131,6 +123,26 @@ var Bs3Editor;
     var Layer = {
       TRANSITION: 400,
 
+      init: function() {
+        $('.add-layer', editorEl).click(Layer.onAdd);
+
+        layerEl
+          .on("click", ".delete-layer", Layer.onDelete)
+          .on("mouseenter", ".layer-item .layer-item-btn", Layer.onMouseIn)
+          .on("mouseleave", ".layer-item .layer-item-btn", Layer.onMouseOut);
+
+        layerEl.on("click", ".layer-item .layer-item-btn", Layer.onSelect);
+
+        if ($('.layer-item:visible', layerEl).length > 0) {
+          $('.add-layer').tooltip({
+            placement: "right",
+            title: "Add Layer"
+          });
+        }
+
+        $('.container-choices [data-toggle="tooltip"]', layerEl).tooltip();
+      },
+
       onAdd: function() {
         var _this = this;
 
@@ -142,9 +154,16 @@ var Bs3Editor;
           }, Layer.TRANSITION, function() {
             $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
             $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              placement: "right",
+              title: "Add Layer"
+            });
 
             during();
           });
+
+          // remove tooltip
+          $(_this).tooltip("hide");
         };
 
         var during = function(afterCallback) {
@@ -206,6 +225,7 @@ var Bs3Editor;
             }, Layer.TRANSITION, function() {
               $('.add-layer', editorEl).html('<span class="glyphicon glyphicon-plus"></span> Add Layer');
               $('.add-layer', editorEl).prop("disabled", false);
+              $('.add-layer', editorEl).tooltip("destroy");
             });
 
             layerEl.hide();
@@ -219,7 +239,7 @@ var Bs3Editor;
         var _this = this;
         var iconEl = $("span", $(this));
 
-        $('.panel-title a span', layerEl).removeClass("active");
+        $('.layer-item .layer-item-btn span', layerEl).removeClass("active");
 
         _.delay(function() {
           if (!$(_this).hasClass("collapsed")) {
