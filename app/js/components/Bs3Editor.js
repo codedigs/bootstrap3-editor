@@ -12,6 +12,7 @@ var Bs3Editor;
     var init = function() {
       $(':input[name="overlay"]', editorEl).click(Overlay.onClick);
       Layer.init();
+      LayerRow.init();
     };
 
     var DragEvent = {
@@ -268,6 +269,32 @@ var Bs3Editor;
             iconEl.removeClass("hover");
           }
         }, 100);
+      }
+    };
+
+    var LayerRow = {
+      init: function() {
+        $('.add-layer-row', editorEl).click(LayerRow.onAdd);
+
+        // layerEl
+        //   .on("click", ".delete-layer", Layer.onDelete)
+        //   .on("mouseenter", ".layer-item .layer-item-btn", Layer.onMouseIn)
+        //   .on("mouseleave", ".layer-item .layer-item-btn", Layer.onMouseOut);
+
+        // layerEl.on("click", ".layer-item .layer-item-btn", Layer.onSelect);
+
+        // if ($('.layer-item:visible', layerEl).length > 0) {
+        //   $('.add-layer').tooltip({
+        //     placement: "right",
+        //     title: "Add Layer"
+        //   });
+        // }
+
+        // $('.container-choices [data-toggle="tooltip"]', layerEl).tooltip();
+      },
+
+      onAdd: function() {
+        alert();
       }
     };
 
