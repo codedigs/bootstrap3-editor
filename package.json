@@ -1,15 +1,18 @@
 {
-  "name": "svg",
+  "name": "bootstrap3-editor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "node node_modules/.bin/df-cli init",
+    "serve": "node node_modules/.bin/df-cli serve",
+    "build": "node node_modules/.bin/df-cli build"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "browser-sync": "^2.26.7",
-    "gulp": "^3.9.1"
+  "author": "Rodrigo Galura III<rodrigogalura3rd@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "dom-focus": "^1.2.0"
   }
 }

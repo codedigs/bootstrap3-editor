@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>Bootstrap 3 Editor</title>
-    <!-- build:css css/app.css-->
-    <link rel="stylesheet" href="./lib/node_modules/bootstrap3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./lib/node_modules/smokejs/dist/css/smoke.min.css" />
-    <link rel="stylesheet" href="./css/helper.css" />
-    <link rel="stylesheet" href="./css/app.css" />
-    <!-- endbuild-->
-</head>
+    <meta charset="UTF-8">
+    <title>Document</title>
 
+    <!-- build:css  css/app.css -->
+    <link rel="stylesheet" type="text/css" href="./lib/node_modules/bootstrap3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./lib/node_modules/smokejs/dist/css/smoke.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/helper.css" />
+    <link rel="stylesheet" type="text/css" href="./css/app.css" />
+    <!-- endbuild -->
+</head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-8">
-                <div class="playground" id="playground"></div>
+                <div id="playground" class="playground"></div>
             </div>
+
             <div class="col-xs-4">
                 <div class="margin-top margin-right">
                     <div class="editor" id="bs3-editor">
                         <div class="panel panel-primary">
-                            <div class="panel-heading"><span class="glyphicon glyphicon-move move-tool no-select" style="display: none"></span>
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-move move-tool no-select" style="display: none"></span>
+
                                 <div class="checkbox pull-right no-margin-top">
                                     <label class="cursor-pointer no-select">
-                                        <input type="checkbox" name="overlay" />Overlay
+                                        <input type="checkbox" name="overlay" /> Overlay
                                     </label>
                                 </div>
-                                <h1 class="panel-title no-select"></h1>
+                                <h1 class="panel-title no-select">Bootstrap 3 Editor</h1>
                             </div>
                             <div class="panel-body">
-                                <button class="btn btn-primary btn-xs add-layer"><span class="glyphicon glyphicon-plus"></span>
+                                <button class="btn btn-primary btn-xs add-layer">
+                                    <span class="glyphicon glyphicon-plus"></span>
                                 </button>
+
                                 <div class="panel-group panel-layers" id="bs3-ed-layers" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default layer-item">
                                         <div class="panel-heading" role="tab">
                                             <div class="pull-right layer-button">
-                                                <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 1"><span class="glyphicon glyphicon-trash"></span>
+                                                <button class="btn btn-danger btn-xs delete-layer" data-layer-name="Layer 1">
+                                                    <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
                                             </div>
 
@@ -58,13 +63,7 @@
                                                     </label>
                                                 </div>
 
-                                                <hr class="margin-top-5 margin-bottom-5" />
-
-                                                <button class="btn btn-primary btn-xs add-layer-row">
-                                                    <span class="glyphicon glyphicon-plus"></span>
-                                                </button>
-
-                                                <div class="panel-group panel-layers-rows" id="layer1-rows" role="tablist" aria-multiselectable="true">
+                                                <div class="panel-group panel-rows" id="layer1-rows" role="tablist" aria-multiselectable="true">
                                                     <div class="panel panel-default row-item">
                                                         <div class="panel-heading" role="tab">
                                                             <div class="pull-right row-button">
@@ -140,15 +139,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="./lib/jquery-3.4.1/jquery.js"></script>
-    <script type="text/javascript" src="./lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./lib/underscore-1.9.1/underscore.min.js"></script>
-    <script type="text/javascript" src="./lib/smoke-3.1.1/smoke.min.js"></script>
-    <script type="text/javascript" src="./js/components/Bs3Editor.js"></script>
-
-    <script type="text/javascript" src="./js/smoke-modify.js"></script>
-    <script type="text/javascript" src="./js/helper.js"></script>
-
     <script type="text/template" id="layer-item-tmpl">
         <div class="panel panel-default layer-item">
             <div class="panel-heading" role="tab">
@@ -172,30 +162,17 @@
         </div>
     </script>
 
-    <script type="text/template" id="layer-row-item-tmpl">
-        <div class="panel panel-default layer-row-item">
-            <div class="panel-heading" role="tab">
-                <div class="pull-right layer-row-button">
-                    <button class="btn btn-danger btn-xs delete-layer-row" data-layer-row-name="<%= layer_row_name %>">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                </div>
+    <!-- build:js js/app.js -->
+    <script type="text/javascript" src="./lib/node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="./lib/node_modules/bootstrap3/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./lib/node_modules/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="./lib/node_modules/smokejs/dist/js/smoke.min.js"></script>
+    <script type="text/javascript" src="./js/components/Bs3Editor.js"></script>
 
-                <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#bs3-ed-layers" href="#<%= layer_row_id %>" aria-expanded="true" aria-controls="<%= layer_row_id %>">
-                        <span class="glyphicon glyphicon-chevron-up"></span> <%= layer_name %>
-                    </a>
-                </h4>
-            </div>
-            <div id="<%= layer_row_id %>" class="panel-collapse collapse" role="tabpanel">
-                <div class="panel-body">
-                    <%= layer_row_content %>
-                </div>
-            </div>
-        </div>
-    </script>
+    <script type="text/javascript" src="./js/smoke-modify.js"></script>
+    <script type="text/javascript" src="./js/helper.js"></script>
 
     <script type="text/javascript" src="./js/app.js"></script>
+    <!-- endbuild -->
 </body>
-
 </html>
