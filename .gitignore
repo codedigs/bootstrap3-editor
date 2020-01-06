@@ -1,7 +1,8 @@
-/node_modules
-/app/lib/node_modules
-/app/lib/yarn-error.log
-/app/css
+/**/node_modules
+/**/npm-debug.log
+/**/yarn-error.log
 /app/**/*.html
-/npm-debug.log
+/app/css
+/dist
+/dfconfig.js
 !.gitignore
