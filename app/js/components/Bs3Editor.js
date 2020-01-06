@@ -7,7 +7,7 @@ var Bs3Editor;
     instanstiated = true;
 
     var editorEl = $('#bs3-editor');
-    var layerEl = $('#bs3-ed-layers');
+    var layersEl = $('#bs3-ed-layers');
 
     var init = function() {
       $(':input[name="overlay"]', editorEl).click(Overlay.onClick);
@@ -122,26 +122,26 @@ var Bs3Editor;
     };
 
     var Layer = {
+      number: 1,
       TRANSITION: 400,
 
       init: function() {
         $('.add-layer', editorEl).click(Layer.onAdd);
 
-        layerEl
-          .on("click", ".delete-layer", Layer.onDelete)
-          .on("mouseenter", ".layer-item .layer-item-btn", Layer.onMouseIn)
-          .on("mouseleave", ".layer-item .layer-item-btn", Layer.onMouseOut);
+        layersEl
+          .on("click", ".layer .delete-layer", Layer.onDelete)
+          .on("click", ".layer .layer-btn", Layer.onSelect)
+          .on("mouseenter", ".layer .layer-btn", Layer.onMouseIn)
+          .on("mouseleave", ".layer .layer-btn", Layer.onMouseOut);
 
-        layerEl.on("click", ".layer-item .layer-item-btn", Layer.onSelect);
-
-        if ($('.layer-item:visible', layerEl).length > 0) {
+        if ($('.layer:visible', layersEl).length > 0) {
           $('.add-layer').tooltip({
             placement: "right",
             title: "Add Layer"
           });
         }
 
-        $('.container-choices [data-toggle="tooltip"]', layerEl).tooltip();
+        $('.container-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
 
       onAdd: function() {
@@ -167,14 +167,12 @@ var Bs3Editor;
           $(_this).tooltip("hide");
         };
 
-        var during = function(afterCallback) {
-          var tmpl = _.template($('#layer-item-tmpl').html());
+        var during = function() {
+          var tmpl = _.template($('#layer-tmpl').html());
 
-          var layers_len = $('.layer-item:visible', layerEl).length;
-
-          layerEl.append(tmpl({
-            layer_name: "Layer " + (layers_len+1),
-            layer_id: "bs3-ed-layer" + (layers_len+1),
+          layersEl.append(tmpl({
+            layer_number: ++Layer.number,
+            layer_name: "Layer " + Layer.number,
             layer_content: "Lorem ipsum"
           }));
 
@@ -182,10 +180,10 @@ var Bs3Editor;
         };
 
         var after = function() {
-          var isLayerVisible = $(':visible', layerEl).length > 0;
+          var isLayerVisible = $(':visible', layersEl).length > 0;
 
           if (!isLayerVisible) {
-            layerEl.show();
+            layersEl.show();
           }
         };
 
@@ -210,7 +208,7 @@ var Bs3Editor;
         };
 
         var during = function() {
-          $(_this).closest('.layer-item').fadeOut(function() {
+          $(_this).closest('.layer').fadeOut(function() {
             this.remove();
 
             after();
@@ -218,7 +216,7 @@ var Bs3Editor;
         };
 
         var after = function() {
-          if ($('.layer-item:visible', layerEl).length < 1) {
+          if ($('.layer:visible', layersEl).length < 1) {
             $('.add-layer', editorEl).prop("disabled", true);
 
             $('.add-layer', editorEl).animate({
@@ -229,7 +227,7 @@ var Bs3Editor;
               $('.add-layer', editorEl).tooltip("destroy");
             });
 
-            layerEl.hide();
+            layersEl.hide();
           }
         };
 
@@ -240,7 +238,7 @@ var Bs3Editor;
         var _this = this;
         var iconEl = $("span", $(this));
 
-        $('.layer-item .layer-item-btn span', layerEl).removeClass("active");
+        $('.layer .layer-btn span', layersEl).removeClass("active");
 
         _.delay(function() {
           if (!$(_this).hasClass("collapsed")) {
@@ -273,28 +271,113 @@ var Bs3Editor;
     };
 
     var LayerRow = {
+      number: 1,
       init: function() {
         $('.add-layer-row', editorEl).click(LayerRow.onAdd);
 
-        // layerEl
-        //   .on("click", ".delete-layer", Layer.onDelete)
-        //   .on("mouseenter", ".layer-item .layer-item-btn", Layer.onMouseIn)
-        //   .on("mouseleave", ".layer-item .layer-item-btn", Layer.onMouseOut);
+        layersEl
+          // .on("click", ".layer-row .delete-layer-row", LayerRow.onDelete)
+          .on("click", ".layer-row .layer-row-btn", LayerRow.onSelect)
+          .on("mouseenter", ".layer-row .layer-row-btn", LayerRow.onMouseIn)
+          .on("mouseleave", ".layer-row .layer-row-btn", LayerRow.onMouseOut);
 
-        // layerEl.on("click", ".layer-item .layer-item-btn", Layer.onSelect);
-
-        // if ($('.layer-item:visible', layerEl).length > 0) {
+        // if ($('.layer:visible', layersEl).length > 0) {
         //   $('.add-layer').tooltip({
         //     placement: "right",
         //     title: "Add Layer"
         //   });
         // }
 
-        // $('.container-choices [data-toggle="tooltip"]', layerEl).tooltip();
+        // $('.container-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
 
       onAdd: function() {
-        alert();
+        var _this = this;
+
+        var before = function() {
+          $(_this).prop("disabled", true);
+
+          $(_this).animate({
+            width: 24
+          }, Layer.TRANSITION, function() {
+            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+            $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              placement: "right",
+              title: "Add Row"
+            });
+
+            during();
+          });
+
+          // remove tooltip
+          $(_this).tooltip("hide");
+        };
+
+        var during = function() {
+          var tmpl = _.template($('#layer-row-tmpl').html());
+          var layerEl = $(_this).closest('.layer');
+          var layerNum = layerEl.data('layer-number');
+          var layerRowEl = $('.panel-layers-rows', layerEl);
+
+          layerRowEl.append(tmpl({
+            layer_number: layerNum,
+            layer_row_number: ++LayerRow.number,
+            layer_row_content: "Lorem ipsum"
+          }));
+
+          after();
+        };
+
+        var after = function() {
+          var layerEl = $(_this).closest('.layer');
+          var layerRowEl = $('.panel-layers-rows', layerEl);
+          var hasRow = $('.layer-row:visible', layerRowEl).length > 0;
+
+          if (!hasRow) {
+            layersEl.show();
+          }
+        };
+
+        before();
+      },
+
+      onSelect: function() {
+        console.log('onSelect');
+
+        var _this = this;
+        var iconEl = $("span", $(this));
+
+        $('.layer-row .layer-row-btn span', layersEl).removeClass("active");
+
+        _.delay(function() {
+          if (!$(_this).hasClass("collapsed")) {
+            iconEl.addClass("active");
+          } else {
+            iconEl.removeClass("active");
+          }
+        }, 100);
+      },
+
+      onMouseIn: function() {
+        console.log('fdsa');
+        var iconEl = $("span", $(this));
+
+        _.delay(function() {
+          if (!iconEl.hasClass("collapsed")) {
+            iconEl.addClass("hover");
+          }
+        }, 100);
+      },
+
+      onMouseOut: function() {
+        var iconEl = $("span", $(this));
+
+        _.delay(function() {
+          if (!iconEl.hasClass("collapsed")) {
+            iconEl.removeClass("hover");
+          }
+        }, 100);
       }
     };
 

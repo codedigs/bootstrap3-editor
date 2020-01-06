@@ -1,15 +1,18 @@
-.panel-group.panel-rows#layer1-rows(
+.panel-group.panel-layers-rows.margin-top#layer1-rows(
   role="tablist"
   aria-multiselectable="true"
 )
-  .panel.panel-default.row-item
+  button.btn.btn-primary.btn-xs.add-layer-row
+    span.glyphicon.glyphicon-plus
+
+  .panel.panel-default.layer-row(data-layer-row-number="1")
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
+        button.btn.btn-danger.btn-xs.delete-layer-row(data-layer-name="Layer 1")
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
-        a(
+        a.layer-row-btn(
           data-toggle="collapse"
           data-parent="#layer1-rows"
           href="#layer1-row1"

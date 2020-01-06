@@ -32,28 +32,54 @@ html(lang="en")
                   h1.panel-title.no-select Bootstrap 3 Editor
 
                 .panel-body
-                  include templates/layer-item.pug
+                  include templates/layer.pug
 
-    script(type="text/template" id="layer-item-tmpl")
-      .panel.panel-default.layer-item
+    script(type="text/template" id="layer-tmpl")
+      .panel.panel-default.layer(data-layer-number!="<%= layer_number %>")
         .panel-heading(role="tab")
           .pull-right.layer-button
             button.btn.btn-danger.btn-xs.delete-layer(data-layer-name!="<%= layer_name %>")
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
-            a.collapsed(
+            a.layer-btn(
               data-toggle="collapse"
               data-parent="#bs3-ed-layers"
-              href!="#<%= layer_id %>"
+              href!="#bs3-ed-layer<%= layer_number %>"
               aria-expanded="true"
-              aria-controls!="<%= layer_id %>"
+              aria-controls!="bs3-ed-layer<%= layer_number %>"
             )
+              span.glyphicon.glyphicon-chevron-up
+              |
+              | <%= layer_name %>
+
         .panel-collapse.collapse(
-          id!="<%= layer_id %>"
+          id!="bs3-ed-layer<%= layer_number %>"
           role="tabpanel"
         )
           .panel-body <%= layer_content %>
+
+    script(type="text/template" id="layer-row-tmpl")
+      .panel.panel-default.layer-row(data-layer-row-number!="<%= layer_row_number %>")
+        .panel-heading(role="tab")
+          .pull-right.row-button
+            button.btn.btn-danger.btn-xs.delete-layer-row(data-layer-name!="Row <%= layer_row_number %>")
+              span.glyphicon.glyphicon-trash
+
+          h4.panel-title
+            a.layer-row-btn(
+              data-toggle="collapse"
+              data-parent!="#layer<%= layer_number %>-rows"
+              href!="#layer<%= layer_number %>-row<%= layer_row_number %>"
+              aria-expanded="true"
+              aria-controls!="layer<%= layer_number %>-row<%= layer_row_number %>"
+            )
+              span.glyphicon.glyphicon-chevron-up
+              |
+              | Row <%= layer_row_number %>
+
+        .panel-collapse.collapse(role="tabpanel")&attributes({id: "layer<%= layer_number %>-row<%= layer_row_number %>"})
+          .panel-body <%= layer_row_content %>
 
     // build:js js/app.js
     script(type="text/javascript" src="./lib/node_modules/jquery/dist/jquery.js")

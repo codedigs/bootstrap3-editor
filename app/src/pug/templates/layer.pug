@@ -5,14 +5,14 @@ button.btn.btn-primary.btn-xs.add-layer
   role="tablist"
   aria-multiselectable="true"
 )
-  .panel.panel-default.layer-item
+  .panel.panel-default.layer(data-layer-number="1")
     .panel-heading(role="tab")
       .pull-right.layer-button
         button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
-        a.layer-item-btn(
+        a.layer-btn(
           data-toggle="collapse"
           data-parent="#bs3-ed-layers"
           href="#bs3-ed-layer1"
@@ -49,4 +49,4 @@ button.btn.btn-primary.btn-xs.add-layer
             |
             | full
 
-        include layer-item-row.pug
+        include layer-row.pug
