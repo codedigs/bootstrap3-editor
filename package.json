@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< Updated upstream
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "node node_modules/.bin/df-cli init",
+    "serve": "node node_modules/.bin/df-cli serve --watch='pug'",
+    "build": "node node_modules/.bin/df-cli build"
+>>>>>>> Stashed changes
   },
   "author": "",
   "license": "ISC",

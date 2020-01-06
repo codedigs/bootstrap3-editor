@@ -1,0 +1,96 @@
+button.btn.btn-primary.btn-xs.add-layer
+  span.glyphicon.glyphicon-plus
+
+.panel-group.panel-layers#bs3-ed-layers(
+  role="tablist"
+  aria-multiselectable="true"
+)
+  .panel.panel-default.layer-item
+    .panel-heading(role="tab")
+      .pull-right.layer-button
+        button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
+          span.glyphicon.glyphicon-trash
+
+      h4.panel-title
+        a.layer-item-btn(
+          data-toggle="collapse"
+          data-parent="#bs3-ed-layers"
+          href="#bs3-ed-layer1"
+          aria-expanded="true"
+          aria-controls="bs3-ed-layer1"
+        )
+          span.glyphicon.glyphicon-chevron-up.active
+          |
+          | Layer 1
+
+    .panel-collapse.collapse.in#bs3-ed-layer1(role="tabpanel")
+      .panel-body
+        .btn-group.container-choices(data-toggle="buttons")
+          label.btn.btn-default.btn-xs.active(
+            data-toggle="tooltip"
+            title="container"
+          )
+            input(
+              type="radio"
+              name="container"
+              autocomplete="off"
+            )
+            |
+            | fixed
+          label.btn.btn-default.btn-xs(
+            data-toggle="tooltip"
+            title="container-fluid"
+          )
+            input(
+              type="radio"
+              name="container"
+              autocomplete="off"
+            )
+            |
+            | full
+
+        .panel-group.panel-rows#layer1-rows(
+          role="tablist"
+          aria-multiselectable="true"
+        )
+          .panel.panel-default.row-item
+            .panel-heading(role="tab")
+              .pull-right.row-button
+                button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
+                  span.glyphicon.glyphicon-trash
+
+              h4.panel-title
+                a(
+                  data-toggle="collapse"
+                  data-parent="#layer1-rows"
+                  href="#layer1-row1"
+                  aria-expanded="true"
+                  aria-controls="layer1-row1"
+                )
+                  span.glyphicon.glyphicon-chevron-up.active
+                  |
+                  | Row 1
+
+            .panel-collapse.collapse.in#layer1-row1(role="tabpanel")
+              .panel-body Anim pariatur cliche reprehenderit, enim eiusmod high life
+
+          .panel.panel-default.row-item
+            .panel-heading(role="tab")
+              .pull-right.row-button
+                button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
+                  span.glyphicon.glyphicon-trash
+
+              h4.panel-title
+                a.collapsed(
+                  data-toggle="collapse"
+                  data-parent="#layer1-rows"
+                  href="#layer1-row2"
+                  aria-expanded="false"
+                  aria-controls="layer1-row2"
+                )
+                  span.glyphicon.glyphicon-chevron-up
+                  |
+                  | Row 2
+
+            .panel-collapse.collapse#layer1-row2(role="tabpanel")
+              .panel-body Anim pariatur cliche reprehenderit, enim eiusmod high life

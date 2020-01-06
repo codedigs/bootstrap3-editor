@@ -1,2 +1,7 @@
 /node_modules
+/app/lib/node_modules
+/app/lib/yarn-error.log
+/app/css
+/app/**/*.html
+/npm-debug.log
 !.gitignore
