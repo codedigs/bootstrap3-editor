@@ -1,36 +1,53 @@
-.cursor-pointer {
-    cursor: pointer;
+.show-grid[class^=col-] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #eee;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86, 61, 124, .2);
 }
 
-.no-select {
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.no {
+  &-select {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+
+  &-margin {
+    &-top {
+      margin-top: 0;
+    }
+
+    &-bottom {
+      margin-bottom: 0;
+    }
+  }
 }
 
-.no-margin-top {
-    margin-top: 0;
-}
-
-.no-margin-bottom {
-    margin-bottom: 0;
-}
-
-.margin-top {
+.margin {
+  &-top {
     margin-top: 15px;
-}
 
-.margin-top-5 {
-    margin-top: 5px;
-}
+    &-5 {
+      margin-top: 5px;
+    }
+  }
 
-.margin-bottom-5 {
-    margin-bottom: 5px;
-}
+  &-bottom {
+    &-5 {
+      margin-bottom: 5px;
+    }
+  }
 
-.margin-right {
+  &-right {
     margin-right: 15px;
+  }
 }
