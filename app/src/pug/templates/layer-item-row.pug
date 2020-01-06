@@ -1,0 +1,24 @@
+.panel-group.panel-rows#layer1-rows(
+  role="tablist"
+  aria-multiselectable="true"
+)
+  .panel.panel-default.row-item
+    .panel-heading(role="tab")
+      .pull-right.row-button
+        button.btn.btn-danger.btn-xs.delete-layer(data-layer-name="Layer 1")
+          span.glyphicon.glyphicon-trash
+
+      h4.panel-title
+        a(
+          data-toggle="collapse"
+          data-parent="#layer1-rows"
+          href="#layer1-row1"
+          aria-expanded="true"
+          aria-controls="layer1-row1"
+        )
+          span.glyphicon.glyphicon-chevron-up.active
+          |
+          | Row 1
+
+    .panel-collapse.collapse.in#layer1-row1(role="tabpanel")
+      .panel-body Anim pariatur cliche reprehenderit, enim eiusmod high life
