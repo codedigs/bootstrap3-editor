@@ -134,7 +134,9 @@ var Bs3Editor;
           .on("mouseenter", ".layer .layer-btn", Layer.onMouseIn)
           .on("mouseleave", ".layer .layer-btn", Layer.onMouseOut);
 
-        if ($('.layer:visible', layersEl).length > 0) {
+        var hasLayer = $('.layer', layersEl).length > 0;
+
+        if (hasLayer) {
           $('.add-layer').tooltip({
             placement: "right",
             title: "Add Layer"
@@ -150,18 +152,25 @@ var Bs3Editor;
         var before = function() {
           $(_this).prop("disabled", true);
 
-          $(_this).animate({
-            width: 24
-          }, Layer.TRANSITION, function() {
-            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
-            $(_this).prop("disabled", false);
-            $(_this).tooltip({
-              placement: "right",
-              title: "Add Layer"
-            });
+          var hasLayer = $('.layer', layersEl).length > 0;
 
+          if (hasLayer) {
             during();
-          });
+            $(_this).prop("disabled", false);
+          } else {
+            $(_this).animate({ // animate the button
+              width: 24
+            }, Layer.TRANSITION, function() {
+              $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+              $(_this).prop("disabled", false);
+              $(_this).tooltip({
+                placement: "right",
+                title: "Add Layer"
+              });
+
+              during();
+            });
+          }
 
           // remove tooltip
           $(_this).tooltip("hide");
@@ -180,9 +189,10 @@ var Bs3Editor;
         };
 
         var after = function() {
-          var isLayerVisible = $(':visible', layersEl).length > 0;
+          var hasLayer = $('.layer', layersEl).length > 0;
+          console.log(hasLayer);
 
-          if (!isLayerVisible) {
+          if (!hasLayer) {
             layersEl.show();
           }
         };
@@ -216,7 +226,9 @@ var Bs3Editor;
         };
 
         var after = function() {
-          if ($('.layer:visible', layersEl).length < 1) {
+          var hasLayer = $('.layer', layersEl).length > 0;
+
+          if (!hasLayer) {
             $('.add-layer', editorEl).prop("disabled", true);
 
             $('.add-layer', editorEl).animate({
@@ -276,7 +288,7 @@ var Bs3Editor;
         $('.add-layer-row', editorEl).click(LayerRow.onAdd);
 
         layersEl
-          // .on("click", ".layer-row .delete-layer-row", LayerRow.onDelete)
+          .on("click", ".layer-row .delete-layer-row", LayerRow.onDelete)
           .on("click", ".layer-row .layer-row-btn", LayerRow.onSelect)
           .on("mouseenter", ".layer-row .layer-row-btn", LayerRow.onMouseIn)
           .on("mouseleave", ".layer-row .layer-row-btn", LayerRow.onMouseOut);
@@ -295,7 +307,15 @@ var Bs3Editor;
         var _this = this;
 
         var before = function() {
+          var layerEl = $(_this).closest('.layer');
+          var layerRowsEl = $('.panel-layers-rows', layerEl);
+          var hasRow = $('.layer-row:visible', layerRowsEl).length > 0;
+
           $(_this).prop("disabled", true);
+
+          if (hasRow) {
+
+          }
 
           $(_this).animate({
             width: 24
@@ -318,9 +338,9 @@ var Bs3Editor;
           var tmpl = _.template($('#layer-row-tmpl').html());
           var layerEl = $(_this).closest('.layer');
           var layerNum = layerEl.data('layer-number');
-          var layerRowEl = $('.panel-layers-rows', layerEl);
+          var layerRowsEl = $('.panel-layers-rows', layerEl);
 
-          layerRowEl.append(tmpl({
+          layerRowsEl.append(tmpl({
             layer_number: layerNum,
             layer_row_number: ++LayerRow.number,
             layer_row_content: "Lorem ipsum"
@@ -331,11 +351,59 @@ var Bs3Editor;
 
         var after = function() {
           var layerEl = $(_this).closest('.layer');
-          var layerRowEl = $('.panel-layers-rows', layerEl);
-          var hasRow = $('.layer-row:visible', layerRowEl).length > 0;
+          var layerRowsEl = $('.panel-layers-rows', layerEl);
+          var hasRow = $('.layer-row:visible', layerRowsEl).length > 0;
 
           if (!hasRow) {
             layersEl.show();
+          }
+        };
+
+        before();
+      },
+
+      onDelete: function() {
+        var _this = this;
+
+        var before = function() {
+          $(_this).prop("disabled", true);
+
+          var row_name = $(_this).data("row-name");
+
+          smkConfirm("Do you want to delete row " + row_name, function(isYes) {
+            $(_this).prop("disabled", false);
+
+            if (isYes) {
+              during();
+            }
+          });
+        };
+
+        var during = function() {
+          $(_this).closest('.layer-row').fadeOut(function() {
+            this.remove();
+
+            after();
+          });
+        };
+
+        var after = function() {
+          var layerEl = $(_this).closest('.layer');
+          var layerRowsEl = $('.panel-layers-rows', layerEl);
+          var hasNoRow = $('.layer-row:visible', layerRowsEl).length > 0;
+
+          if (hasNoRow) {
+            $('.add-layer-row', layerRowsEl).prop("disabled", true);
+
+            $('.add-layer-row', layerRowsEl).animate({
+              width: 82
+            }, Layer.TRANSITION, function() {
+              $('.add-layer-row', layerRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
+              $('.add-layer-row', layerRowsEl).prop("disabled", false);
+              $('.add-layer-row', layerRowsEl).tooltip("destroy");
+            });
+
+            layersEl.hide();
           }
         };
 
