@@ -287,7 +287,7 @@ var Bs3Editor;
         //   });
         // }
 
-        // $('.container-choices [data-toggle="tooltip"]', layersEl).tooltip();
+        $('.gutter-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
 
       onAdd: function() {

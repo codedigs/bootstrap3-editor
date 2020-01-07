@@ -24,4 +24,16 @@
           | Row 1
 
     .panel-collapse.collapse.in#layer1-row1(role="tabpanel")
-      .panel-body Anim pariatur cliche reprehenderit, enim eiusmod high life
+      .panel-body
+        .btn-group.gutter-choices(data-toggle="buttons")
+          label.btn.btn-default.btn-xs(
+            data-toggle="tooltip"
+            title="row-no-gutters"
+          )
+            input(
+              type="checkbox"
+              name="gutter"
+              autocomplete="off"
+            )
+            |
+            | No gutters
