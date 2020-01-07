@@ -184,17 +184,6 @@ var Bs3Editor;
             layer_name: "Layer " + Layer.number,
             layer_content: "Lorem ipsum"
           }));
-
-          after();
-        };
-
-        var after = function() {
-          var hasLayer = $('.layer', layersEl).length > 0;
-          console.log(hasLayer);
-
-          if (!hasLayer) {
-            layersEl.show();
-          }
         };
 
         before();
@@ -208,7 +197,7 @@ var Bs3Editor;
 
           var layer_name = $(_this).data("layer-name");
 
-          smkConfirm("Do you want to delete layer " + layer_name, function(isYes) {
+          smkConfirm({text: "Do you want to delete layer " + layer_name}, function(isYes) {
             $(_this).prop("disabled", false);
 
             if (isYes) {
@@ -238,8 +227,6 @@ var Bs3Editor;
               $('.add-layer', editorEl).prop("disabled", false);
               $('.add-layer', editorEl).tooltip("destroy");
             });
-
-            layersEl.hide();
           }
         };
 
@@ -307,15 +294,7 @@ var Bs3Editor;
         var _this = this;
 
         var before = function() {
-          var layerEl = $(_this).closest('.layer');
-          var layerRowsEl = $('.panel-layers-rows', layerEl);
-          var hasRow = $('.layer-row:visible', layerRowsEl).length > 0;
-
           $(_this).prop("disabled", true);
-
-          if (hasRow) {
-
-          }
 
           $(_this).animate({
             width: 24
@@ -345,18 +324,6 @@ var Bs3Editor;
             layer_row_number: ++LayerRow.number,
             layer_row_content: "Lorem ipsum"
           }));
-
-          after();
-        };
-
-        var after = function() {
-          var layerEl = $(_this).closest('.layer');
-          var layerRowsEl = $('.panel-layers-rows', layerEl);
-          var hasRow = $('.layer-row:visible', layerRowsEl).length > 0;
-
-          if (!hasRow) {
-            layersEl.show();
-          }
         };
 
         before();
@@ -370,7 +337,7 @@ var Bs3Editor;
 
           var row_name = $(_this).data("row-name");
 
-          smkConfirm("Do you want to delete row " + row_name, function(isYes) {
+          smkConfirm({text: "Do you want to delete row " + row_name}, function(isYes) {
             $(_this).prop("disabled", false);
 
             if (isYes) {
@@ -381,30 +348,25 @@ var Bs3Editor;
 
         var during = function() {
           $(_this).closest('.layer-row').fadeOut(function() {
+            // get layer element before delete it
+            var layerEl = this.closest('.layer');
             this.remove();
 
-            after();
+            var layerRowsEl = $('.panel-layers-rows', layerEl);
+            var hasNoRow = $('.layer-row', layerRowsEl).length === 0;
+
+            if (hasNoRow) {
+              $('.add-layer-row', layerRowsEl).prop("disabled", true);
+
+              $('.add-layer-row', layerRowsEl).animate({
+                width: 82
+              }, Layer.TRANSITION, function() {
+                $('.add-layer-row', layerRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
+                $('.add-layer-row', layerRowsEl).prop("disabled", false);
+                $('.add-layer-row', layerRowsEl).tooltip("destroy");
+              });
+            }
           });
-        };
-
-        var after = function() {
-          var layerEl = $(_this).closest('.layer');
-          var layerRowsEl = $('.panel-layers-rows', layerEl);
-          var hasNoRow = $('.layer-row:visible', layerRowsEl).length > 0;
-
-          if (hasNoRow) {
-            $('.add-layer-row', layerRowsEl).prop("disabled", true);
-
-            $('.add-layer-row', layerRowsEl).animate({
-              width: 82
-            }, Layer.TRANSITION, function() {
-              $('.add-layer-row', layerRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
-              $('.add-layer-row', layerRowsEl).prop("disabled", false);
-              $('.add-layer-row', layerRowsEl).tooltip("destroy");
-            });
-
-            layersEl.hide();
-          }
         };
 
         before();
