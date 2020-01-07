@@ -1,3 +1,5 @@
+include mixins/layer.pug
+
 <!DOCTYPE html>
 html(lang="en")
   head
@@ -32,7 +34,23 @@ html(lang="en")
                   h1.panel-title.no-select Bootstrap 3 Editor
 
                 .panel-body
-                  include templates/layer.pug
+                  - var layerParentID = "bs3-ed-layers";
+                  - var defaultNumberOfLayer = 3;
+
+                  button.btn.btn-primary.btn-xs.add-layer
+                    span.glyphicon.glyphicon-plus
+
+                  .panel-group.panel-layers(
+                    role="tablist"
+                    aria-multiselectable="true"
+                  )&attributes({
+                    id: layerParentID,
+                    'data-counter': defaultNumberOfLayer // number of layer
+                  })
+                    - var n = 1;
+                    while n <= defaultNumberOfLayer
+                      +layer(layerParentID, n, n === 1) // n === 1 means open first layer
+                      - n++
 
     script(type="text/template" id="layer-tmpl")
       .panel.panel-default.layer(data-layer-number!="<%= layer_number %>")

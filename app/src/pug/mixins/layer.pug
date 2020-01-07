@@ -1,0 +1,71 @@
+include layer-row.pug
+
+mixin layer(layerParentID, layer_number, active=false)
+  - var layerID = "bs3-ed-layer" + layer_number;
+
+  .panel.panel-default.layer&attributes({'data-layer-number': layer_number})
+      .panel-heading(role="tab")
+        .pull-right.layer-button
+          button.btn.btn-danger.btn-xs.delete-layer&attributes({'data-layer-name': "Layer " + layer_number})
+            span.glyphicon.glyphicon-trash
+
+        h4.panel-title
+          a.layer-btn(
+            data-toggle="collapse"
+            aria-expanded="true"
+          )&attributes({
+            'data-parent': "#" + layerParentID,
+            'href': "#" + layerID,
+            'aria-controls': layerID
+          })
+            span.glyphicon.glyphicon-chevron-up&attributes({class: active ? "active" : ""})
+            |
+            | Layer #{layer_number}
+
+      .panel-collapse.collapse(role="tabpanel")&attributes({
+        id: layerID,
+        class: active ? "in" : ""
+      })
+        .panel-body
+          .btn-group.container-choices(data-toggle="buttons")
+            label.btn.btn-default.btn-xs.active(
+              data-toggle="tooltip"
+              title="container"
+            )
+              input(
+                type="radio"
+                name="container"
+                autocomplete="off"
+              )
+              |
+              | fixed
+            label.btn.btn-default.btn-xs(
+              data-toggle="tooltip"
+              title="container-fluid"
+            )
+              input(
+                type="radio"
+                name="container"
+                autocomplete="off"
+              )
+              |
+              | full
+
+          - var layerRowParentID = "layer" + layer_number + "-rows";
+          - var defaultNumberOfLayerRow = 2;
+
+          .margin-top
+            button.btn.btn-primary.btn-xs.add-layer-row
+              span.glyphicon.glyphicon-plus
+
+            .panel-group.panel-layers-rows(
+              role="tablist"
+              aria-multiselectable="true"
+            )&attributes({
+              id: layerRowParentID,
+              'data-counter': defaultNumberOfLayerRow
+            })
+              - var n = 1;
+              while n <= defaultNumberOfLayerRow
+                +layer_row(layerRowParentID, layer_number, n, n === 1) // n === 1 means open first row
+                - n++

@@ -1,6 +1,6 @@
 module.exports = {
   pug: {
-    src: "app/src/pug/**/*.pug",
+    src: "app/src/pug/index.pug",
     dest: "app"
   },
 

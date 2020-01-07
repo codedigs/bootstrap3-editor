@@ -71,8 +71,6 @@ var Bs3Editor;
             top: DragEvent.initialEditorCoor.y + top,
             left: DragEvent.initialEditorCoor.x + left
           });
-
-          console.log("dragging!!!");
         }
       },
 
@@ -122,8 +120,16 @@ var Bs3Editor;
     };
 
     var Layer = {
-      number: 1,
       TRANSITION: 400,
+
+      getCounter: function() {
+        return $('#bs3-editor .panel-layers').data('counter');
+      },
+
+      incrementCounter: function() {
+        var currentCounter = Layer.getCounter();
+        $('#bs3-editor .panel-layers').data('counter', currentCounter+1);
+      },
 
       init: function() {
         $('.add-layer', editorEl).click(Layer.onAdd);
@@ -179,9 +185,10 @@ var Bs3Editor;
         var during = function() {
           var tmpl = _.template($('#layer-tmpl').html());
 
+          Layer.incrementCounter();
           layersEl.append(tmpl({
-            layer_number: ++Layer.number,
-            layer_name: "Layer " + Layer.number,
+            layer_number: Layer.getCounter(),
+            layer_name: "Layer " + Layer.getCounter(),
             layer_content: "Lorem ipsum"
           }));
         };
@@ -197,7 +204,7 @@ var Bs3Editor;
 
           var layer_name = $(_this).data("layer-name");
 
-          smkConfirm({text: "Do you want to delete layer " + layer_name}, function(isYes) {
+          smkConfirm({text: "Do you want to delete " + layer_name}, function(isYes) {
             $(_this).prop("disabled", false);
 
             if (isYes) {
@@ -270,7 +277,15 @@ var Bs3Editor;
     };
 
     var LayerRow = {
-      number: 1,
+      getCounter: function(layersRowsEl) {
+        return layersRowsEl.data('counter');
+      },
+
+      incrementCounter: function(layersRowsEl) {
+        var currentCounter = LayerRow.getCounter(layersRowsEl);
+        layersRowsEl.data('counter', currentCounter+1);
+      },
+
       init: function() {
         $('.add-layer-row', editorEl).click(LayerRow.onAdd);
 
@@ -292,6 +307,9 @@ var Bs3Editor;
 
       onAdd: function() {
         var _this = this;
+        var layerEl = $(this).closest('.layer');
+        var layerNum = layerEl.data('layer-number');
+        var layersRowsEl = $('.panel-layers-rows', layerEl);
 
         var before = function() {
           $(_this).prop("disabled", true);
@@ -315,13 +333,11 @@ var Bs3Editor;
 
         var during = function() {
           var tmpl = _.template($('#layer-row-tmpl').html());
-          var layerEl = $(_this).closest('.layer');
-          var layerNum = layerEl.data('layer-number');
-          var layerRowsEl = $('.panel-layers-rows', layerEl);
 
-          layerRowsEl.append(tmpl({
+          LayerRow.incrementCounter(layersRowsEl);
+          layersRowsEl.append(tmpl({
             layer_number: layerNum,
-            layer_row_number: ++LayerRow.number,
+            layer_row_number: LayerRow.getCounter(layersRowsEl),
             layer_row_content: "Lorem ipsum"
           }));
         };
@@ -337,7 +353,7 @@ var Bs3Editor;
 
           var row_name = $(_this).data("row-name");
 
-          smkConfirm({text: "Do you want to delete row " + row_name}, function(isYes) {
+          smkConfirm({text: "Do you want to delete " + row_name}, function(isYes) {
             $(_this).prop("disabled", false);
 
             if (isYes) {
@@ -352,18 +368,18 @@ var Bs3Editor;
             var layerEl = this.closest('.layer');
             this.remove();
 
-            var layerRowsEl = $('.panel-layers-rows', layerEl);
-            var hasNoRow = $('.layer-row', layerRowsEl).length === 0;
+            var layersRowsEl = $('.panel-layers-rows', layerEl);
+            var hasNoRow = $('.layer-row', layersRowsEl).length === 0;
 
             if (hasNoRow) {
-              $('.add-layer-row', layerRowsEl).prop("disabled", true);
+              $('.add-layer-row', layersRowsEl).prop("disabled", true);
 
-              $('.add-layer-row', layerRowsEl).animate({
+              $('.add-layer-row', layersRowsEl).animate({
                 width: 82
               }, Layer.TRANSITION, function() {
-                $('.add-layer-row', layerRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
-                $('.add-layer-row', layerRowsEl).prop("disabled", false);
-                $('.add-layer-row', layerRowsEl).tooltip("destroy");
+                $('.add-layer-row', layersRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
+                $('.add-layer-row', layersRowsEl).prop("disabled", false);
+                $('.add-layer-row', layersRowsEl).tooltip("destroy");
               });
             }
           });
@@ -373,8 +389,6 @@ var Bs3Editor;
       },
 
       onSelect: function() {
-        console.log('onSelect');
-
         var _this = this;
         var iconEl = $("span", $(this));
 
@@ -390,7 +404,6 @@ var Bs3Editor;
       },
 
       onMouseIn: function() {
-        console.log('fdsa');
         var iconEl = $("span", $(this));
 
         _.delay(function() {

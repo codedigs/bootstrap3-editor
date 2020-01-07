@@ -1,0 +1,45 @@
+mixin layer_row(layerRowParentID, layer_number, row_number, active=false)
+  - var layerRowID = "layer" + layer_number + "-row" + row_number;
+
+  .panel.panel-default.layer-row&attributes({
+    'data-layer-row-number': row_number
+  })
+    .panel-heading(role="tab")
+      .pull-right.row-button
+        button.btn.btn-danger.btn-xs.delete-layer-row&attributes({
+          'data-row-name': "Row " + row_number
+        })
+          span.glyphicon.glyphicon-trash
+
+      h4.panel-title
+        a.layer-row-btn(
+          data-toggle="collapse"
+          aria-expanded="true"
+        )&attributes({
+          'data-parent': layerRowParentID,
+          href: "#" + layerRowID,
+          'aria-controls': layerRowID
+        })
+          span.glyphicon.glyphicon-chevron-up&attributes({
+            class: active ? "active" : ""
+          })
+          |
+          | Row #{row_number}
+
+    .panel-collapse.collapse(role="tabpanel")&attributes({
+      'id': layerRowID,
+      class: active ? "in" : ""
+    })
+      .panel-body
+        .btn-group.gutter-choices(data-toggle="buttons")
+          label.btn.btn-default.btn-xs(
+            data-toggle="tooltip"
+            title="row-no-gutters"
+          )
+            input(
+              type="checkbox"
+              name="gutter"
+              autocomplete="off"
+            )
+            |
+            | No gutters

@@ -90,5 +90,9 @@
         }
       }
     }
+
+    &-layers .collapse.in {
+      border: 1px solid #ddd;
+    }
   }
 }

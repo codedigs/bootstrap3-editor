@@ -5,4 +5,5 @@
 /app/css
 /dist
 /dfconfig.js
+/report.*.json
 !.gitignore
