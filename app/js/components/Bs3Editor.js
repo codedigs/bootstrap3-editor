@@ -295,12 +295,13 @@ var Bs3Editor;
           .on("mouseenter", ".layer-row .layer-row-btn", LayerRow.onMouseIn)
           .on("mouseleave", ".layer-row .layer-row-btn", LayerRow.onMouseOut);
 
-        // if ($('.layer:visible', layersEl).length > 0) {
-        //   $('.add-layer').tooltip({
-        //     placement: "right",
-        //     title: "Add Layer"
-        //   });
-        // }
+        // add tooltip in Add Row Button if the layer has rows
+        var panelLayerRowEl = $('.layer .layer-row:nth-child(1)', layersEl).parent();
+        var addLayerRowBtn = panelLayerRowEl.parent().find('.add-layer-row');
+        addLayerRowBtn.tooltip({
+          placement: "right",
+          title: "Add Row"
+        });
 
         $('.gutter-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
@@ -372,14 +373,15 @@ var Bs3Editor;
             var hasNoRow = $('.layer-row', layersRowsEl).length === 0;
 
             if (hasNoRow) {
-              $('.add-layer-row', layersRowsEl).prop("disabled", true);
+              var addLayerRowBtnEl = layersRowsEl.parent().find('.add-layer-row');
 
-              $('.add-layer-row', layersRowsEl).animate({
+              addLayerRowBtnEl.prop("disabled", true);
+              addLayerRowBtnEl.animate({
                 width: 82
               }, Layer.TRANSITION, function() {
-                $('.add-layer-row', layersRowsEl).html('<span class="glyphicon glyphicon-plus"></span> Add Row');
-                $('.add-layer-row', layersRowsEl).prop("disabled", false);
-                $('.add-layer-row', layersRowsEl).tooltip("destroy");
+                addLayerRowBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Row');
+                addLayerRowBtnEl.prop("disabled", false);
+                addLayerRowBtnEl.tooltip("destroy");
               });
             }
           });

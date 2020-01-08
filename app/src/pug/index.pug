@@ -35,7 +35,7 @@ html(lang="en")
 
                 .panel-body
                   - var layerParentID = "bs3-ed-layers";
-                  - var defaultNumberOfLayer = 3;
+                  - var DEFAULT_NUM_OF_LAYER = 3;
 
                   button.btn.btn-primary.btn-xs.add-layer
                     span.glyphicon.glyphicon-plus
@@ -45,10 +45,10 @@ html(lang="en")
                     aria-multiselectable="true"
                   )&attributes({
                     id: layerParentID,
-                    'data-counter': defaultNumberOfLayer // number of layer
+                    'data-counter': DEFAULT_NUM_OF_LAYER // number of layer
                   })
                     - var n = 1;
-                    while n <= defaultNumberOfLayer
+                    while n <= DEFAULT_NUM_OF_LAYER
                       +layer(layerParentID, n, n === 1) // n === 1 means open first layer
                       - n++
 

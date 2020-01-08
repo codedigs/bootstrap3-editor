@@ -1,12 +1,12 @@
 include layer-row.pug
 
-mixin layer(layerParentID, layer_number, active=false)
-  - var layerID = "bs3-ed-layer" + layer_number;
+mixin layer(layerParentID, layer_num, active=false)
+  - var layerID = "bs3-ed-layer" + layer_num;
 
-  .panel.panel-default.layer&attributes({'data-layer-number': layer_number})
+  .panel.panel-default.layer&attributes({'data-layer-number': layer_num})
       .panel-heading(role="tab")
         .pull-right.layer-button
-          button.btn.btn-danger.btn-xs.delete-layer&attributes({'data-layer-name': "Layer " + layer_number})
+          button.btn.btn-danger.btn-xs.delete-layer&attributes({'data-layer-name': "Layer " + layer_num})
             span.glyphicon.glyphicon-trash
 
         h4.panel-title
@@ -20,7 +20,7 @@ mixin layer(layerParentID, layer_number, active=false)
           })
             span.glyphicon.glyphicon-chevron-up&attributes({class: active ? "active" : ""})
             |
-            | Layer #{layer_number}
+            | Layer #{layer_num}
 
       .panel-collapse.collapse(role="tabpanel")&attributes({
         id: layerID,
@@ -51,8 +51,8 @@ mixin layer(layerParentID, layer_number, active=false)
               |
               | full
 
-          - var layerRowParentID = "layer" + layer_number + "-rows";
-          - var defaultNumberOfLayerRow = 2;
+          - var layerRowParentID = "layer" + layer_num + "-rows";
+          - var DEFAULT_NUM_OF_ROW = 2;
 
           .margin-top
             button.btn.btn-primary.btn-xs.add-layer-row
@@ -63,9 +63,9 @@ mixin layer(layerParentID, layer_number, active=false)
               aria-multiselectable="true"
             )&attributes({
               id: layerRowParentID,
-              'data-counter': defaultNumberOfLayerRow
+              'data-counter': DEFAULT_NUM_OF_ROW
             })
               - var n = 1;
-              while n <= defaultNumberOfLayerRow
-                +layer_row(layerRowParentID, layer_number, n, n === 1) // n === 1 means open first row
+              while n <= DEFAULT_NUM_OF_ROW
+                +layer_row(layerRowParentID, layer_num, n, n === 1) // n === 1 means open first row
                 - n++

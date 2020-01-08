@@ -1,13 +1,15 @@
-mixin layer_row(layerRowParentID, layer_number, row_number, active=false)
-  - var layerRowID = "layer" + layer_number + "-row" + row_number;
+include layer-row-col.pug
+
+mixin layer_row(layerRowParentID, layer_num, row_num, active=false)
+  - var layerRowID = "layer" + layer_num + "-row" + row_num;
 
   .panel.panel-default.layer-row&attributes({
-    'data-layer-row-number': row_number
+    'data-layer-row-number': row_num
   })
     .panel-heading(role="tab")
       .pull-right.row-button
         button.btn.btn-danger.btn-xs.delete-layer-row&attributes({
-          'data-row-name': "Row " + row_number
+          'data-row-name': "Row " + row_num
         })
           span.glyphicon.glyphicon-trash
 
@@ -16,7 +18,7 @@ mixin layer_row(layerRowParentID, layer_number, row_number, active=false)
           data-toggle="collapse"
           aria-expanded="true"
         )&attributes({
-          'data-parent': layerRowParentID,
+          'data-parent': "#" + layerRowParentID,
           href: "#" + layerRowID,
           'aria-controls': layerRowID
         })
@@ -24,7 +26,7 @@ mixin layer_row(layerRowParentID, layer_number, row_number, active=false)
             class: active ? "active" : ""
           })
           |
-          | Row #{row_number}
+          | Row #{row_num}
 
     .panel-collapse.collapse(role="tabpanel")&attributes({
       'id': layerRowID,
@@ -43,3 +45,22 @@ mixin layer_row(layerRowParentID, layer_number, row_number, active=false)
             )
             |
             | No gutters
+
+        - var layerRowColParentID = "layer" + layer_num + "-row" + row_num + "-cols";
+        - var DEFAULT_NUM_OF_COL = 2;
+
+        .margin-top
+          button.btn.btn-primary.btn-xs.add-layer-row-col
+            span.glyphicon.glyphicon-plus
+
+          .panel-group.panel-layers-rows-cols(
+            role="tablist"
+            aria-multiselectable="true"
+          )&attributes({
+            id: layerRowColParentID,
+            'data-counter': DEFAULT_NUM_OF_COL
+          })
+            - var n = 1;
+            while n <= DEFAULT_NUM_OF_COL
+              +layer_row_col(layerRowColParentID, layer_num, row_num, n, n === 1) // n === 1 means open first row
+              - n++
