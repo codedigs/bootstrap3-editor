@@ -2,7 +2,7 @@ mixin layer_row_col(layerRowColParentID, layer_num, row_num, col_num, active=fal
   - var layerRowColID = "layer" + layer_num + "-row" + row_num + "-col" + col_num;
 
   .panel.panel-default.layer-row-col&attributes({
-    'data-layer-row-col-number': row_num
+    'data-layer-row-col-number': col_num
   })
     .panel-heading(role="tab")
       .pull-right.row-button

@@ -13,6 +13,7 @@ var Bs3Editor;
       $(':input[name="overlay"]', editorEl).click(Overlay.onClick);
       Layer.init();
       LayerRow.init();
+      LayerRowCol.init();
     };
 
     var DragEvent = {
@@ -423,6 +424,158 @@ var Bs3Editor;
             iconEl.removeClass("hover");
           }
         }, 100);
+      }
+    };
+
+    var LayerRowCol = {
+      getCounter: function(layersRowsColsEl) {
+        return layersRowsColsEl.data('counter');
+      },
+
+      incrementCounter: function(layersRowsColsEl) {
+        var currentCounter = LayerRowCol.getCounter(layersRowsColsEl);
+        layersRowsColsEl.data('counter', currentCounter+1);
+      },
+
+      init: function() {
+        $('.add-layer-row-col', editorEl).click(LayerRowCol.onAdd);
+
+        layersEl
+          .on("click", ".layer-row-col .delete-layer-row-col", LayerRowCol.onDelete)
+          .on("click", ".layer-row-col .layer-row-col-btn", LayerRowCol.onSelect)
+          .on("mouseenter", ".layer-row-col .layer-row-col-btn", LayerRowCol.onMouseIn)
+          .on("mouseleave", ".layer-row-col .layer-row-col-btn", LayerRowCol.onMouseOut);
+
+        // add tooltip in Add Row Button if the layer has rows
+        var panelLayerRowColEl = $('.layer .layer-row .layer-row-col:nth-child(1)', layersEl).parent();
+        var addLayerRowColBtn = panelLayerRowColEl.parent().find('.add-layer-row-col');
+        addLayerRowColBtn.tooltip({
+          placement: "right",
+          title: "Add Col"
+        });
+      },
+
+      onAdd: function() {
+        var _this = this;
+        var layerEl = $(this).closest('.layer');
+        var layerRowEl = $('.layer-row', layerEl);
+        var layerNum = layerEl.data('layer-number');
+        var layerRowNum = layerEl.data('layer-row-number');
+
+        var layersRowsColsEl = $('.panel-layers-rows-cols', layerRowEl);
+
+        var before = function() {
+          $(_this).prop("disabled", true);
+
+          $(_this).animate({
+            width: 24
+          }, Layer.TRANSITION, function() {
+            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+            $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              placement: "right",
+              title: "Add Col"
+            });
+
+            during();
+          });
+
+          // remove tooltip
+          $(_this).tooltip("hide");
+        };
+
+        var during = function() {
+          var tmpl = _.template($('#layer-row-col-tmpl').html());
+
+          LayerRowCol.incrementCounter(layersRowsColsEl);
+          layersRowsColsEl.append(tmpl({
+            layer_number: layerNum,
+            layer_row_number: layersRowsColsEl,
+            layer_row_col_number: LayerRowCol.getCounter(layersRowsColsEl),
+            layer_row_col_content: "Lorem ipsum"
+          }));
+        };
+
+        before();
+      },
+
+      onDelete: function() {
+        var _this = this;
+
+        var before = function() {
+          $(_this).prop("disabled", true);
+
+          var col_name = $(_this).data("col-name");
+
+          smkConfirm({text: "Do you want to delete " + col_name}, function(isYes) {
+            $(_this).prop("disabled", false);
+
+            if (isYes) {
+              during();
+            }
+          });
+        };
+
+        var during = function() {
+          $(_this).closest('.layer-row-col').fadeOut(function() {
+            // get layer-row element before delete it
+            var layerRowEl = this.closest('.layer-row');
+            this.remove();
+
+            var layersRowsColsEl = $('.panel-layers-rows-cols', layerRowEl);
+            var hasNoCol = $('.layer-row-col', layersRowsColsEl).length === 0;
+
+            if (hasNoCol) {
+              var addLayerRowColBtnEl = layersRowsColsEl.parent().find('.add-layer-row-col');
+
+              addLayerRowColBtnEl.prop("disabled", true);
+              addLayerRowColBtnEl.animate({
+                width: 82
+              }, Layer.TRANSITION, function() {
+                addLayerRowColBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Col');
+                addLayerRowColBtnEl.prop("disabled", false);
+                addLayerRowColBtnEl.tooltip("destroy");
+              });
+            }
+          });
+        };
+
+        before();
+      },
+
+      onSelect: function() {
+        // var _this = this;
+        // var iconEl = $("span", $(this));
+
+        // $('.layer-row .layer-row-btn span', layersEl).removeClass("active");
+
+        // _.delay(function() {
+        //   if (!$(_this).hasClass("collapsed")) {
+        //     iconEl.addClass("active");
+        //   } else {
+        //     iconEl.removeClass("active");
+        //   }
+        // }, 100);
+      },
+
+      onMouseIn: function() {
+        // var iconEl = $("span", $(this));
+
+        // _.delay(function() {
+        //   if (!iconEl.hasClass("collapsed")) {
+        //     iconEl.addClass("hover");
+        //   }
+        // }, 100);
+      },
+
+      onMouseOut: function() {
+        // var iconEl = $("span", $(this));
+
+        // _.delay(function() {
+        //   if (!iconEl.hasClass("collapsed")) {
+        //     iconEl.removeClass("hover");
+        //   }
+        // }, 100);
       }
     };
 

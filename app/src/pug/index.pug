@@ -96,8 +96,36 @@ html(lang="en")
               |
               | Row <%= layer_row_number %>
 
-        .panel-collapse.collapse(role="tabpanel")&attributes({id: "layer<%= layer_number %>-row<%= layer_row_number %>"})
+        .panel-collapse.collapse(
+          id= "layer<%= layer_number %>-row<%= layer_row_number %>"
+          role="tabpanel"
+        )
           .panel-body <%= layer_row_content %>
+
+    script(type="text/template" id="layer-row-col-tmpl")
+      .panel.panel-default.layer-row-col(data-layer-row-col-number!="<%= layer_row_col_number %>")
+        .panel-heading(role="tab")
+          .pull-right.row-button
+            button.btn.btn-danger.btn-xs.delete-layer-row-col(data-col-name!="Col <%= layer_row_col_number %>")
+              span.glyphicon.glyphicon-trash
+
+          h4.panel-title
+            a.layer-row-btn(
+              data-toggle="collapse"
+              data-parent!="#layer<%= layer_number %>-row<%= layer_row_number %>-cols"
+              href!="#layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+              aria-expanded="true"
+              aria-controls!="layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+            )
+              span.glyphicon.glyphicon-chevron-up
+              |
+              | Col <%= layer_row_col_number %>
+
+        .panel-collapse.collapse(
+          id="layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+          role="tabpanel"
+        )
+          .panel-body <%= layer_row_col_content %>
 
     // build:js js/app.js
     script(type="text/javascript" src="./lib/node_modules/jquery/dist/jquery.js")
