@@ -189,7 +189,6 @@ var Bs3Editor;
           Layer.incrementCounter();
           layersEl.append(tmpl({
             layer_number: Layer.getCounter(),
-            layer_name: "Layer " + Layer.getCounter(),
             layer_content: "Lorem ipsum"
           }));
         };
@@ -278,13 +277,13 @@ var Bs3Editor;
     };
 
     var LayerRow = {
-      getCounter: function(layersRowsEl) {
-        return layersRowsEl.data('counter');
+      getCounter: function(rowsEl) {
+        return rowsEl.data('counter');
       },
 
-      incrementCounter: function(layersRowsEl) {
-        var currentCounter = LayerRow.getCounter(layersRowsEl);
-        layersRowsEl.data('counter', currentCounter+1);
+      incrementCounter: function(rowsEl) {
+        var currentCounter = LayerRow.getCounter(rowsEl);
+        rowsEl.data('counter', currentCounter+1);
       },
 
       init: function() {
@@ -297,9 +296,9 @@ var Bs3Editor;
           .on("mouseleave", ".layer-row .layer-row-btn", LayerRow.onMouseOut);
 
         // add tooltip in Add Row Button if the layer has rows
-        var panelLayerRowEl = $('.layer .layer-row:nth-child(1)', layersEl).parent();
-        var addLayerRowBtn = panelLayerRowEl.parent().find('.add-layer-row');
-        addLayerRowBtn.tooltip({
+        var panelRowEl = $('.layer .layer-row:nth-child(1)', layersEl).parent();
+        var addRowBtn = panelRowEl.parent().find('.add-layer-row');
+        addRowBtn.tooltip({
           placement: "right",
           title: "Add Row"
         });
@@ -311,7 +310,7 @@ var Bs3Editor;
         var _this = this;
         var layerEl = $(this).closest('.layer');
         var layerNum = layerEl.data('layer-number');
-        var layersRowsEl = $('.panel-layers-rows', layerEl);
+        var rowsEl = $('.panel-layers-rows', layerEl);
 
         var before = function() {
           $(_this).prop("disabled", true);
@@ -336,11 +335,11 @@ var Bs3Editor;
         var during = function() {
           var tmpl = _.template($('#layer-row-tmpl').html());
 
-          LayerRow.incrementCounter(layersRowsEl);
-          layersRowsEl.append(tmpl({
+          LayerRow.incrementCounter(rowsEl);
+          rowsEl.append(tmpl({
             layer_number: layerNum,
-            layer_row_number: LayerRow.getCounter(layersRowsEl),
-            layer_row_content: "Lorem ipsum"
+            row_number: LayerRow.getCounter(rowsEl),
+            row_content: "Lorem ipsum"
           }));
         };
 
@@ -370,19 +369,19 @@ var Bs3Editor;
             var layerEl = this.closest('.layer');
             this.remove();
 
-            var layersRowsEl = $('.panel-layers-rows', layerEl);
-            var hasNoRow = $('.layer-row', layersRowsEl).length === 0;
+            var rowsEl = $('.panel-layers-rows', layerEl);
+            var hasNoRow = $('.layer-row', rowsEl).length === 0;
 
             if (hasNoRow) {
-              var addLayerRowBtnEl = layersRowsEl.parent().find('.add-layer-row');
+              var addRowBtnEl = rowsEl.parent().find('.add-layer-row');
 
-              addLayerRowBtnEl.prop("disabled", true);
-              addLayerRowBtnEl.animate({
+              addRowBtnEl.prop("disabled", true);
+              addRowBtnEl.animate({
                 width: 82
               }, Layer.TRANSITION, function() {
-                addLayerRowBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Row');
-                addLayerRowBtnEl.prop("disabled", false);
-                addLayerRowBtnEl.tooltip("destroy");
+                addRowBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Row');
+                addRowBtnEl.prop("disabled", false);
+                addRowBtnEl.tooltip("destroy");
               });
             }
           });
@@ -428,13 +427,13 @@ var Bs3Editor;
     };
 
     var LayerRowCol = {
-      getCounter: function(layersRowsColsEl) {
-        return layersRowsColsEl.data('counter');
+      getCounter: function(colsEl) {
+        return colsEl.data('counter');
       },
 
-      incrementCounter: function(layersRowsColsEl) {
-        var currentCounter = LayerRowCol.getCounter(layersRowsColsEl);
-        layersRowsColsEl.data('counter', currentCounter+1);
+      incrementCounter: function(colsEl) {
+        var currentCounter = LayerRowCol.getCounter(colsEl);
+        colsEl.data('counter', currentCounter+1);
       },
 
       init: function() {
@@ -447,9 +446,9 @@ var Bs3Editor;
           .on("mouseleave", ".layer-row-col .layer-row-col-btn", LayerRowCol.onMouseOut);
 
         // add tooltip in Add Row Button if the layer has rows
-        var panelLayerRowColEl = $('.layer .layer-row .layer-row-col:nth-child(1)', layersEl).parent();
-        var addLayerRowColBtn = panelLayerRowColEl.parent().find('.add-layer-row-col');
-        addLayerRowColBtn.tooltip({
+        var panelColEl = $('.layer .layer-row .layer-row-col:nth-child(1)', layersEl).parent();
+        var addColBtn = panelColEl.parent().find('.add-layer-row-col');
+        addColBtn.tooltip({
           placement: "right",
           title: "Add Col"
         });
@@ -462,7 +461,7 @@ var Bs3Editor;
         var layerNum = layerEl.data('layer-number');
         var layerRowNum = layerEl.data('layer-row-number');
 
-        var layersRowsColsEl = $('.panel-layers-rows-cols', layerRowEl);
+        var colsEl = $('.panel-layers-rows-cols', layerRowEl);
 
         var before = function() {
           $(_this).prop("disabled", true);
@@ -487,12 +486,12 @@ var Bs3Editor;
         var during = function() {
           var tmpl = _.template($('#layer-row-col-tmpl').html());
 
-          LayerRowCol.incrementCounter(layersRowsColsEl);
-          layersRowsColsEl.append(tmpl({
+          LayerRowCol.incrementCounter(colsEl);
+          colsEl.append(tmpl({
             layer_number: layerNum,
-            layer_row_number: layersRowsColsEl,
-            layer_row_col_number: LayerRowCol.getCounter(layersRowsColsEl),
-            layer_row_col_content: "Lorem ipsum"
+            row_number: colsEl,
+            col_number: LayerRowCol.getCounter(colsEl),
+            col_content: "Lorem ipsum"
           }));
         };
 
@@ -522,19 +521,19 @@ var Bs3Editor;
             var layerRowEl = this.closest('.layer-row');
             this.remove();
 
-            var layersRowsColsEl = $('.panel-layers-rows-cols', layerRowEl);
-            var hasNoCol = $('.layer-row-col', layersRowsColsEl).length === 0;
+            var colsEl = $('.panel-layers-rows-cols', layerRowEl);
+            var hasNoCol = $('.layer-row-col', colsEl).length === 0;
 
             if (hasNoCol) {
-              var addLayerRowColBtnEl = layersRowsColsEl.parent().find('.add-layer-row-col');
+              var addColBtnEl = colsEl.parent().find('.add-layer-row-col');
 
-              addLayerRowColBtnEl.prop("disabled", true);
-              addLayerRowColBtnEl.animate({
+              addColBtnEl.prop("disabled", true);
+              addColBtnEl.animate({
                 width: 82
               }, Layer.TRANSITION, function() {
-                addLayerRowColBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Col');
-                addLayerRowColBtnEl.prop("disabled", false);
-                addLayerRowColBtnEl.tooltip("destroy");
+                addColBtnEl.html('<span class="glyphicon glyphicon-plus"></span> Add Col');
+                addColBtnEl.prop("disabled", false);
+                addColBtnEl.tooltip("destroy");
               });
             }
           });

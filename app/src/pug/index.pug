@@ -56,7 +56,7 @@ html(lang="en")
       .panel.panel-default.layer(data-layer-number!="<%= layer_number %>")
         .panel-heading(role="tab")
           .pull-right.layer-button
-            button.btn.btn-danger.btn-xs.delete-layer(data-layer-name!="<%= layer_name %>")
+            button.btn.btn-danger.btn-xs.delete-layer(data-layer-name!="Layer <%= layer_number %>")
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
@@ -69,7 +69,7 @@ html(lang="en")
             )
               span.glyphicon.glyphicon-chevron-up
               |
-              | <%= layer_name %>
+              | Layer <%= layer_number %>
 
         .panel-collapse.collapse(
           id!="bs3-ed-layer<%= layer_number %>"
@@ -78,54 +78,54 @@ html(lang="en")
           .panel-body <%= layer_content %>
 
     script(type="text/template" id="layer-row-tmpl")
-      .panel.panel-default.layer-row(data-layer-row-number!="<%= layer_row_number %>")
+      .panel.panel-default.layer-row(data-layer-row-number!="<%= row_number %>")
         .panel-heading(role="tab")
           .pull-right.row-button
-            button.btn.btn-danger.btn-xs.delete-layer-row(data-row-name!="Row <%= layer_row_number %>")
+            button.btn.btn-danger.btn-xs.delete-layer-row(data-row-name!="Row <%= row_number %>")
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
             a.layer-row-btn(
               data-toggle="collapse"
               data-parent!="#layer<%= layer_number %>-rows"
-              href!="#layer<%= layer_number %>-row<%= layer_row_number %>"
+              href!="#layer<%= layer_number %>-row<%= row_number %>"
               aria-expanded="true"
-              aria-controls!="layer<%= layer_number %>-row<%= layer_row_number %>"
+              aria-controls!="layer<%= layer_number %>-row<%= row_number %>"
             )
               span.glyphicon.glyphicon-chevron-up
               |
-              | Row <%= layer_row_number %>
+              | Row <%= row_number %>
 
         .panel-collapse.collapse(
-          id= "layer<%= layer_number %>-row<%= layer_row_number %>"
+          id= "layer<%= layer_number %>-row<%= row_number %>"
           role="tabpanel"
         )
-          .panel-body <%= layer_row_content %>
+          .panel-body <%= row_content %>
 
     script(type="text/template" id="layer-row-col-tmpl")
-      .panel.panel-default.layer-row-col(data-layer-row-col-number!="<%= layer_row_col_number %>")
+      .panel.panel-default.layer-row-col(data-layer-row-col-number!="<%= col_number %>")
         .panel-heading(role="tab")
           .pull-right.row-button
-            button.btn.btn-danger.btn-xs.delete-layer-row-col(data-col-name!="Col <%= layer_row_col_number %>")
+            button.btn.btn-danger.btn-xs.delete-layer-row-col(data-col-name!="Col <%= col_number %>")
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
             a.layer-row-btn(
               data-toggle="collapse"
-              data-parent!="#layer<%= layer_number %>-row<%= layer_row_number %>-cols"
-              href!="#layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+              data-parent!="#layer<%= layer_number %>-row<%= row_number %>-cols"
+              href!="#layer<%= layer_number %>-row<%= row_number %>-col<%= col_number %>"
               aria-expanded="true"
-              aria-controls!="layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+              aria-controls!="layer<%= layer_number %>-row<%= row_number %>-col<%= col_number %>"
             )
               span.glyphicon.glyphicon-chevron-up
               |
-              | Col <%= layer_row_col_number %>
+              | Col <%= col_number %>
 
         .panel-collapse.collapse(
-          id="layer<%= layer_number %>-row<%= layer_row_number %>-col<%= layer_row_col_number %>"
+          id="layer<%= layer_number %>-row<%= row_number %>-col<%= col_number %>"
           role="tabpanel"
         )
-          .panel-body <%= layer_row_col_content %>
+          .panel-body <%= col_content %>
 
     // build:js js/app.js
     script(type="text/javascript" src="./lib/node_modules/jquery/dist/jquery.js")
