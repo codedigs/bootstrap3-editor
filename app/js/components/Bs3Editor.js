@@ -162,8 +162,8 @@ var Bs3Editor;
           var hasLayer = $('.layer', layersEl).length > 0;
 
           if (hasLayer) {
-            during();
             $(_this).prop("disabled", false);
+            during();
           } else {
             $(_this).animate({ // animate the button
               width: 24
@@ -315,18 +315,25 @@ var Bs3Editor;
         var before = function() {
           $(_this).prop("disabled", true);
 
-          $(_this).animate({
-            width: 24
-          }, Layer.TRANSITION, function() {
-            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
-            $(_this).prop("disabled", false);
-            $(_this).tooltip({
-              placement: "right",
-              title: "Add Row"
-            });
+          var hasRow = $('.layer-row', rowsEl).length > 0;
 
+          if (hasRow) {
+            $(_this).prop("disabled", false);
             during();
-          });
+          } else {
+            $(_this).animate({
+              width: 24
+            }, Layer.TRANSITION, function() {
+              $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+              $(_this).prop("disabled", false);
+              $(_this).tooltip({
+                placement: "right",
+                title: "Add Row"
+              });
+
+              during();
+            });
+          }
 
           // remove tooltip
           $(_this).tooltip("hide");
@@ -457,7 +464,7 @@ var Bs3Editor;
       onAdd: function() {
         var _this = this;
         var layerEl = $(this).closest('.layer');
-        var layerRowEl = $('.layer-row', layerEl);
+        var layerRowEl = $(this).closest('.layer-row');
         var layerNum = layerEl.data('layer-number');
         var layerRowNum = layerEl.data('layer-row-number');
 
@@ -466,18 +473,25 @@ var Bs3Editor;
         var before = function() {
           $(_this).prop("disabled", true);
 
-          $(_this).animate({
-            width: 24
-          }, Layer.TRANSITION, function() {
-            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
-            $(_this).prop("disabled", false);
-            $(_this).tooltip({
-              placement: "right",
-              title: "Add Col"
-            });
+          var hasCol = $('.layer-row-col', colsEl).length > 0;
 
+          if (hasCol) {
+            $(_this).prop("disabled", false);
             during();
-          });
+          } else {
+            $(_this).animate({
+              width: 24
+            }, Layer.TRANSITION, function() {
+              $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+              $(_this).prop("disabled", false);
+              $(_this).tooltip({
+                placement: "right",
+                title: "Add Col"
+              });
+
+              during();
+            });
+          }
 
           // remove tooltip
           $(_this).tooltip("hide");
