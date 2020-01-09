@@ -464,6 +464,11 @@ var Bs3Editor;
         });
 
         $('.delete-layer-row-col[data-toggle="tooltip"]', layersEl).tooltip();
+
+        // disable hiding dropdown
+        layersEl.on("click", ".layer-row-col .dropdown-menu", function(e) {
+          e.stopPropagation();
+        });
       },
 
       onAdd: function() {
@@ -507,7 +512,7 @@ var Bs3Editor;
           LayerRowCol.incrementCounter(colsEl);
           colsEl.append(tmpl({
             layer_number: layerNum,
-            row_number: colsEl,
+            row_number: layerRowNum,
             col_number: LayerRowCol.getCounter(colsEl),
             col_content: "Lorem ipsum"
           }));
