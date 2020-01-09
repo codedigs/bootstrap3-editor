@@ -187,7 +187,7 @@ var Bs3Editor;
 
           Layer.incrementCounter();
           layersEl.append(tmpl({
-            layer_number: Layer.getCounter(),
+            layer_num: Layer.getCounter(),
             layer_content: "Lorem ipsum"
           }));
 
@@ -345,7 +345,7 @@ var Bs3Editor;
 
           LayerRow.incrementCounter(rowsEl);
           rowsEl.append(tmpl({
-            layer_number: layerNum,
+            layer_num: layerNum,
             row_number: LayerRow.getCounter(rowsEl),
             row_content: "Lorem ipsum"
           }));
@@ -511,7 +511,7 @@ var Bs3Editor;
 
           LayerRowCol.incrementCounter(colsEl);
           colsEl.append(tmpl({
-            layer_number: layerNum,
+            layer_num: layerNum,
             row_number: layerRowNum,
             col_number: LayerRowCol.getCounter(colsEl),
             col_content: "Lorem ipsum"

@@ -1,7 +1,7 @@
 include layer-row.pug
 
-mixin layer(layerParentID, layer_num, active=false)
-  - var layerID = "bs3-ed-layer" + layer_num;
+mixin layer(layersID, layer_num, active=false)
+  - var layerID = layersID + "-" + layer_num;
 
   .panel.panel-default.layer&attributes({'data-layer-number': layer_num})
       .panel-heading(role="tab")
@@ -17,7 +17,7 @@ mixin layer(layerParentID, layer_num, active=false)
             data-toggle="collapse"
             aria-expanded="true"
           )&attributes({
-            'data-parent': "#" + layerParentID,
+            'data-parent': "#" + layersID,
             'href': "#" + layerID,
             'aria-controls': layerID
           })
@@ -54,7 +54,7 @@ mixin layer(layerParentID, layer_num, active=false)
               |
               | full
 
-          - var layerRowParentID = "layer" + layer_num + "-rows";
+          - var rowsID = layerID + "-rows";
           - var DEFAULT_NUM_OF_ROW = 2;
 
           .margin-top
@@ -65,10 +65,10 @@ mixin layer(layerParentID, layer_num, active=false)
               role="tablist"
               aria-multiselectable="true"
             )&attributes({
-              id: layerRowParentID,
+              id: rowsID,
               'data-counter': DEFAULT_NUM_OF_ROW
             })
-              - var n = 1;
-              while n <= DEFAULT_NUM_OF_ROW
-                +layer_row(layerRowParentID, layer_num, n, n === 1) // n === 1 means open first row
-                - n++
+              - var row_num = 1;
+              while row_num <= DEFAULT_NUM_OF_ROW
+                +layer_row(rowsID, row_num, row_num === 1) // row_num === 1 means open first row
+                - row_num++

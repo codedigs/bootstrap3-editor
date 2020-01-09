@@ -1,0 +1,248 @@
+mixin layer_row_col_content(colContent)
+  .dropdown
+    button.btn.btn-default.btn-xs.dropdown-toggle(
+      type="button"
+      id="dropdown-menu"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="true"
+    )&attributes({id: colContent + "-dropdown-menu"})
+      span.glyphicon.glyphicon-cog
+      |
+      | Options
+
+    .dropdown-menu&attributes({'aria-labelledby': colContent + "-dropdown-menu"})
+      p Hello world
+      p Hello world
+      p Hello world
+      p Hello world
+      p Hello world
+
+  .row
+    .col-xs-4
+      h4.no-margin-bottom Column
+      .col-choices
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-xs"
+                  autocomplete="off"
+                )
+                |
+                | xs
+          input.form-control(
+            type="number"
+            name="col-xs-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-sm"
+                  autocomplete="off"
+                )
+                |
+                | sm
+          input.form-control(
+            type="number"
+            name="col-sm-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-md"
+                  autocomplete="off"
+                )
+                |
+                | md
+          input.form-control(
+            type="number"
+            name="col-md-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-lg"
+                  autocomplete="off"
+                )
+                |
+                | lg
+          input.form-control(
+            type="number"
+            name="col-lg-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+
+    .col-xs-4
+      h4.no-margin-bottom Offset
+      .col-choices
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-xs"
+                  autocomplete="off"
+                )
+                |
+                | xs
+          input.form-control(
+            type="number"
+            name="col-xs-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-sm"
+                  autocomplete="off"
+                )
+                |
+                | sm
+          input.form-control(
+            type="number"
+            name="col-sm-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-md"
+                  autocomplete="off"
+                )
+                |
+                | md
+          input.form-control(
+            type="number"
+            name="col-md-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-lg"
+                  autocomplete="off"
+                )
+                |
+                | lg
+          input.form-control(
+            type="number"
+            name="col-lg-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+
+    .col-xs-4
+      h4.no-margin-bottom Push Pull
+      .col-choices
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-xs"
+                  autocomplete="off"
+                )
+                |
+                | xs
+          input.form-control(
+            type="number"
+            name="col-xs-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-sm"
+                  autocomplete="off"
+                )
+                |
+                | sm
+          input.form-control(
+            type="number"
+            name="col-sm-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-md"
+                  autocomplete="off"
+                )
+                |
+                | md
+          input.form-control(
+            type="number"
+            name="col-md-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
+        .input-group
+          .input-group-btn
+            .btn-group(data-toggle="buttons")
+              label.btn.btn-default.btn-xs
+                input(
+                  type="checkbox"
+                  name="col-lg"
+                  autocomplete="off"
+                )
+                |
+                | lg
+          input.form-control(
+            type="number"
+            name="col-lg-val"
+            autocomplete="off"
+            min="1"
+            max="12"
+          )
