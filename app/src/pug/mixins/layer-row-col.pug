@@ -6,9 +6,10 @@ mixin layer_row_col(layerRowColParentID, layer_num, row_num, col_num, active=fal
   })
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row-col&attributes({
-          'data-col-name': "Col " + col_num
-        })
+        button.btn.btn-danger.btn-xs.delete-layer-row-col(
+          data-toggle="tooltip"
+          title="Delete Col"
+        )&attributes({'data-col-name': "Col " + col_num})
           span.glyphicon.glyphicon-trash
 
       h4.panel-title

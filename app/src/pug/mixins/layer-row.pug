@@ -8,9 +8,10 @@ mixin layer_row(layerRowParentID, layer_num, row_num, active=false)
   })
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row&attributes({
-          'data-row-name': "Row " + row_num
-        })
+        button.btn.btn-danger.btn-xs.delete-layer-row(
+          data-toggle="tooltip"
+          title="Delete Row"
+        )&attributes({'data-row-name': "Row " + row_num})
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
@@ -50,7 +51,7 @@ mixin layer_row(layerRowParentID, layer_num, row_num, active=false)
         - var DEFAULT_NUM_OF_COL = 2;
 
         .margin-top
-          button.btn.btn-primary.btn-xs.add-layer-row-col
+          button.btn.btn-success.btn-xs.add-layer-row-col
             span.glyphicon.glyphicon-plus
 
           .panel-group.panel-layers-rows-cols(

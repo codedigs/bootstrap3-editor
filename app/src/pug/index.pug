@@ -56,7 +56,11 @@ html(lang="en")
       .panel.panel-default.layer(data-layer-number!="<%= layer_number %>")
         .panel-heading(role="tab")
           .pull-right.layer-button
-            button.btn.btn-danger.btn-xs.delete-layer(data-layer-name!="Layer <%= layer_number %>")
+            button.btn.btn-danger.btn-xs.delete-layer(
+              data-toggle="tooltip"
+              title="Delete Layer"
+              data-layer-name!="Layer <%= layer_number %>"
+            )
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
@@ -81,7 +85,11 @@ html(lang="en")
       .panel.panel-default.layer-row(data-layer-row-number!="<%= row_number %>")
         .panel-heading(role="tab")
           .pull-right.row-button
-            button.btn.btn-danger.btn-xs.delete-layer-row(data-row-name!="Row <%= row_number %>")
+            button.btn.btn-danger.btn-xs.delete-layer-row(
+              data-toggle="tooltip"
+              title="Delete Row"
+              data-row-name!="Row <%= row_number %>"
+            )
               span.glyphicon.glyphicon-trash
 
           h4.panel-title
@@ -106,7 +114,11 @@ html(lang="en")
       .panel.panel-default.layer-row-col(data-layer-row-col-number!="<%= col_number %>")
         .panel-heading(role="tab")
           .pull-right.row-button
-            button.btn.btn-danger.btn-xs.delete-layer-row-col(data-col-name!="Col <%= col_number %>")
+            button.btn.btn-danger.btn-xs.delete-layer-row-col(
+              data-toggle="tooltip"
+              title="Delete Col"
+              data-col-name!="Col <%= col_number %>"
+            )
               span.glyphicon.glyphicon-trash
 
           h4.panel-title

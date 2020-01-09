@@ -145,11 +145,11 @@ var Bs3Editor;
 
         if (hasLayer) {
           $('.add-layer').tooltip({
-            placement: "right",
             title: "Add Layer"
           });
         }
 
+        $('.delete-layer[data-toggle="tooltip"]', layersEl).tooltip();
         $('.container-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
 
@@ -171,7 +171,6 @@ var Bs3Editor;
               $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
               $(_this).prop("disabled", false);
               $(_this).tooltip({
-                placement: "right",
                 title: "Add Layer"
               });
 
@@ -191,6 +190,9 @@ var Bs3Editor;
             layer_number: Layer.getCounter(),
             layer_content: "Lorem ipsum"
           }));
+
+          // initialize tooltip on new row
+          $('.delete-layer:last[data-toggle="tooltip"]', layersEl).tooltip();
         };
 
         before();
@@ -299,10 +301,10 @@ var Bs3Editor;
         var panelRowEl = $('.layer .layer-row:nth-child(1)', layersEl).parent();
         var addRowBtn = panelRowEl.parent().find('.add-layer-row');
         addRowBtn.tooltip({
-          placement: "right",
           title: "Add Row"
         });
 
+        $('.delete-layer-row[data-toggle="tooltip"]', layersEl).tooltip();
         $('.gutter-choices [data-toggle="tooltip"]', layersEl).tooltip();
       },
 
@@ -327,7 +329,6 @@ var Bs3Editor;
               $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
               $(_this).prop("disabled", false);
               $(_this).tooltip({
-                placement: "right",
                 title: "Add Row"
               });
 
@@ -348,6 +349,9 @@ var Bs3Editor;
             row_number: LayerRow.getCounter(rowsEl),
             row_content: "Lorem ipsum"
           }));
+
+          // initialize tooltip on new row
+          $('.delete-layer-row:last[data-toggle="tooltip"]', rowsEl).tooltip();
         };
 
         before();
@@ -456,9 +460,10 @@ var Bs3Editor;
         var panelColEl = $('.layer .layer-row .layer-row-col:nth-child(1)', layersEl).parent();
         var addColBtn = panelColEl.parent().find('.add-layer-row-col');
         addColBtn.tooltip({
-          placement: "right",
           title: "Add Col"
         });
+
+        $('.delete-layer-row-col[data-toggle="tooltip"]', layersEl).tooltip();
       },
 
       onAdd: function() {
@@ -485,7 +490,6 @@ var Bs3Editor;
               $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
               $(_this).prop("disabled", false);
               $(_this).tooltip({
-                placement: "right",
                 title: "Add Col"
               });
 
@@ -507,6 +511,9 @@ var Bs3Editor;
             col_number: LayerRowCol.getCounter(colsEl),
             col_content: "Lorem ipsum"
           }));
+
+          // initialize tooltip on new col
+          $('.delete-layer-row-col:last[data-toggle="tooltip"]', colsEl).tooltip();
         };
 
         before();
