@@ -2,35 +2,44 @@ mixin layer_row_col_content(COL_CONTENT_ID)
   .dropdown
     button.btn.btn-default.btn-xs.dropdown-toggle(
       type="button"
-      id="dropdown-menu"
       data-toggle="dropdown"
       aria-haspopup="true"
       aria-expanded="true"
-    )&attributes({id: COL_CONTENT_ID + "-dropdown-menu"})
+      id=COL_CONTENT_ID + "-dropdown-menu"
+    )
       span.glyphicon.glyphicon-cog
       |
       | Options
 
-    .dropdown-menu&attributes({'aria-labelledby': COL_CONTENT_ID + "-dropdown-menu"})
+    .dropdown-menu(aria-labelledby=COL_CONTENT_ID + "-dropdown-menu")
       li.dropdown-header
         | Enable/Disable
       li
         .item
           .checkbox.no-margin-top
             label
-              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_offset"})
+              input(
+                type="checkbox"
+                name=COL_CONTENT_ID + "-option_offset"
+              )
               | Offset
 
         .item
           .checkbox.no-margin-top
             label
-              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_push_pull"})
+              input(
+                type="checkbox"
+                name=COL_CONTENT_ID + "-option_push_pull"
+              )
               | Push Pull
 
         .item
           .checkbox.no-margin-top
             label
-              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_nesting_column"})
+              input(
+                type="checkbox"
+                name=COL_CONTENT_ID + "-option_nesting_column"
+              )
               | Nesting Column
 
   .row

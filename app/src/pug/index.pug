@@ -34,7 +34,7 @@ html(lang="en")
 
                 .panel-body
                   - var LAYERS_ID = "bs3-ed-layers";
-                  - var DEFAULT_NUM_OF_LAYER = 0;
+                  - var DEFAULT_NUM_OF_LAYER = 2;
 
                   button.btn.btn-primary.btn-xs.add-layer
                     span.glyphicon.glyphicon-plus
@@ -45,10 +45,9 @@ html(lang="en")
                   .panel-group.panel-layers(
                     role="tablist"
                     aria-multiselectable="true"
-                  )&attributes({
-                    id: LAYERS_ID,
-                    'data-counter': DEFAULT_NUM_OF_LAYER // number of layer
-                  })
+                    id=LAYERS_ID
+                    data-counter=DEFAULT_NUM_OF_LAYER
+                  )
                     - var layer_num = 1;
                     while layer_num <= DEFAULT_NUM_OF_LAYER
                       +layer(LAYERS_ID, layer_num, layer_num === 1) // layer_num === 1 means open first layer
@@ -71,9 +70,8 @@ html(lang="en")
               href!="#bs3-ed-layer<%= layer_num %>"
               aria-expanded="true"
               aria-controls!="bs3-ed-layer<%= layer_num %>"
-            )&attributes({
-              'data-parent': "#" + LAYERS_ID
-            })
+              data-parent="#"+LAYERS_ID
+            )
               span.glyphicon.glyphicon-chevron-up
               |
               | Layer <%= layer_num %>
@@ -90,8 +88,9 @@ html(lang="en")
               )
                 input(
                   type="radio"
+                  name!=LAYERS_ID + "-<%= layer_num %>-container_container"
                   autocomplete="off"
-                )&attributes({name: LAYERS_ID + "-<%= layer_num %>-container_container"})
+                )
                 | fixed
               label.btn.btn-default.btn-xs(
                 data-toggle="tooltip"
@@ -99,8 +98,9 @@ html(lang="en")
               )
                 input(
                   type="radio"
+                  name!=LAYERS_ID + "-<%= layer_num %>-container_container_fluid"
                   autocomplete="off"
-                )&attributes({name: LAYERS_ID + "-<%= layer_num %>-container_container_fluid"})
+                )
                 | full
 
             - var DEFAULT_NUM_OF_ROW = 0;
@@ -112,10 +112,9 @@ html(lang="en")
               .panel-group.panel-layers-rows(
                 role="tablist"
                 aria-multiselectable="true"
-              )&attributes({
-                id: LAYERS_ID + "-<%= layer_num %>-rows",
-                'data-counter': DEFAULT_NUM_OF_ROW
-              })
+                id!=LAYERS_ID + "-<%= layer_num %>-rows"
+                data-counter=DEFAULT_NUM_OF_ROW
+              )
 
     script(type="text/template" id="layer-row-tmpl")
       .panel.panel-default.layer-row(data-layer-row-number!="<%= row_number %>")

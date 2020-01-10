@@ -3,32 +3,33 @@ include layer-row.pug
 mixin layer(LAYERS_ID, layer_num, active=false)
   - var LAYER_ID = LAYERS_ID + "-" + layer_num;
 
-  .panel.panel-default.layer&attributes({'data-layer-number': layer_num})
+  .panel.panel-default.layer(data-layer-number=layer_num)
       .panel-heading(role="tab")
         .pull-right.layer-button
           button.btn.btn-danger.btn-xs.delete-layer(
             data-toggle="tooltip"
             title="Delete Layer"
-          )&attributes({'data-layer-name': "Layer " + layer_num})
+            data-layer-name="Layer " + layer_num
+          )
             span.glyphicon.glyphicon-trash
 
         h4.panel-title
           a.layer-btn(
             data-toggle="collapse"
             aria-expanded="true"
-          )&attributes({
-            'data-parent': "#" + LAYERS_ID,
-            'href': "#" + LAYER_ID,
-            'aria-controls': LAYER_ID
-          })
-            span.glyphicon.glyphicon-chevron-up&attributes({class: active ? "active" : ""})
+            data-parent="#" + LAYERS_ID
+            href="#" + LAYER_ID
+            aria-controls=LAYER_ID
+          )
+            span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
             |
             | Layer #{layer_num}
 
-      .panel-collapse.collapse(role="tabpanel")&attributes({
-        id: LAYER_ID,
-        class: active ? "in" : ""
-      })
+      .panel-collapse.collapse(
+        role="tabpanel"
+        id=LAYER_ID
+        class=active ? "in" : ""
+      )
         .panel-body
           .btn-group.container-choices(data-toggle="buttons")
             label.btn.btn-default.btn-xs.active(
@@ -38,7 +39,8 @@ mixin layer(LAYERS_ID, layer_num, active=false)
               input(
                 type="radio"
                 autocomplete="off"
-              )&attributes({name: LAYER_ID + "-container_container"})
+                name=LAYER_ID + "-container_container"
+              )
               | fixed
             label.btn.btn-default.btn-xs(
               data-toggle="tooltip"
@@ -47,7 +49,8 @@ mixin layer(LAYERS_ID, layer_num, active=false)
               input(
                 type="radio"
                 autocomplete="off"
-              )&attributes({name: LAYER_ID + "-container_container_fluid"})
+                name=LAYER_ID + "-container_container_fluid"
+              )
               | full
 
           - var ROWS_ID = LAYER_ID + "-rows";
@@ -60,10 +63,9 @@ mixin layer(LAYERS_ID, layer_num, active=false)
             .panel-group.panel-layers-rows(
               role="tablist"
               aria-multiselectable="true"
-            )&attributes({
-              id: ROWS_ID,
-              'data-counter': DEFAULT_NUM_OF_ROW
-            })
+              id=ROWS_ID
+              data-counter=DEFAULT_NUM_OF_ROW
+            )
               - var row_num = 1;
               while row_num <= DEFAULT_NUM_OF_ROW
                 +layer_row(ROWS_ID, row_num, row_num === 1) // row_num === 1 means open first row

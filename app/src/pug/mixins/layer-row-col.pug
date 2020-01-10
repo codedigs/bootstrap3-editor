@@ -3,36 +3,33 @@ include layer-row-col-content.pug
 mixin layer_row_col(COLS_ID, col_num, active=false)
   - var COL_ID = COLS_ID + "-" + col_num;
 
-  .panel.panel-default.layer-row-col&attributes({
-    'data-layer-row-col-number': col_num
-  })
+  .panel.panel-default.layer-row-col(data-layer-row-col-number=col_num)
     .panel-heading(role="tab")
       .pull-right.row-button
         button.btn.btn-danger.btn-xs.delete-layer-row-col(
           data-toggle="tooltip"
           title="Delete Col"
-        )&attributes({'data-col-name': "Col " + col_num})
+          data-col-name="Col " + col_num
+        )
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
         a.layer-row-col-btn(
           data-toggle="collapse"
           aria-expanded="true"
-        )&attributes({
-          'data-parent': "#" + COLS_ID,
-          href: "#" + COL_ID,
-          'aria-controls': COL_ID
-        })
-          span.glyphicon.glyphicon-chevron-up&attributes({
-            class: active ? "active" : ""
-          })
+          data-parent="#" + COLS_ID
+          href="#" + COL_ID
+          aria-controls=COL_ID
+        )
+          span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
           |
           | Col #{col_num}
 
-    .panel-collapse.collapse(role="tabpanel")&attributes({
-      'id': COL_ID,
-      class: active ? "in" : ""
-    })
+    .panel-collapse.collapse(
+      role="tabpanel"
+      id=COL_ID
+      class=active ? "in" : ""
+    )
       .panel-body
         - var COL_CONTENT_ID = COL_ID + "-content";
         +layer_row_col_content(COL_CONTENT_ID)
