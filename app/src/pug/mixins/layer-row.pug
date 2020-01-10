@@ -1,7 +1,7 @@
 include layer-row-col.pug
 
-mixin layer_row(rowsID, row_num, active=false)
-  - var rowID = rowsID + "-" + row_num;
+mixin layer_row(ROWS_ID, row_num, active=false)
+  - var ROW_ID = ROWS_ID + "-" + row_num;
 
   .panel.panel-default.layer-row&attributes({
     'data-layer-row-number': row_num
@@ -19,9 +19,9 @@ mixin layer_row(rowsID, row_num, active=false)
           data-toggle="collapse"
           aria-expanded="true"
         )&attributes({
-          'data-parent': "#" + rowsID,
-          href: "#" + rowID,
-          'aria-controls': rowID
+          'data-parent': "#" + ROWS_ID,
+          href: "#" + ROW_ID,
+          'aria-controls': ROW_ID
         })
           span.glyphicon.glyphicon-chevron-up&attributes({
             class: active ? "active" : ""
@@ -30,7 +30,7 @@ mixin layer_row(rowsID, row_num, active=false)
           | Row #{row_num}
 
     .panel-collapse.collapse(role="tabpanel")&attributes({
-      'id': rowID,
+      'id': ROW_ID,
       class: active ? "in" : ""
     })
       .panel-body
@@ -44,10 +44,9 @@ mixin layer_row(rowsID, row_num, active=false)
               name="gutter"
               autocomplete="off"
             )
-            |
             | No gutters
 
-        - var colsID = rowID + "-cols";
+        - var COLS_ID = ROW_ID + "-cols";
         - var DEFAULT_NUM_OF_COL = 2;
 
         .margin-top
@@ -58,10 +57,10 @@ mixin layer_row(rowsID, row_num, active=false)
             role="tablist"
             aria-multiselectable="true"
           )&attributes({
-            id: colsID,
+            id: COLS_ID,
             'data-counter': DEFAULT_NUM_OF_COL
           })
             - var col_num = 1;
             while col_num <= DEFAULT_NUM_OF_COL
-              +layer_row_col(colsID, col_num, col_num === 1) // col_num === 1 means open first row
+              +layer_row_col(COLS_ID, col_num, col_num === 1) // col_num === 1 means open first row
               - col_num++

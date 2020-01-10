@@ -39,6 +39,14 @@
     @extend .layer-button
   }
 
+  .col-choices input {
+    height: 22px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 0;
+    width: 50px;
+  }
+
   /* overwrite bootstrap 3 inside of editor */
   .btn {
     border-radius: 0 !important;
@@ -96,11 +104,13 @@
     }
   }
 
-  .col-choices input {
-    height: 22px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 0;
-    width: 50px;
+  .dropdown-menu > li > .item {
+      display: block;
+      padding: 0 20px;
+      clear: both;
+      font-weight: 400;
+      line-height: 1.42857143;
+      color: #333;
+      white-space: nowrap;
   }
 }

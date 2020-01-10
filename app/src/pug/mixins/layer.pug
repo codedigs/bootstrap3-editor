@@ -1,7 +1,7 @@
 include layer-row.pug
 
-mixin layer(layersID, layer_num, active=false)
-  - var layerID = layersID + "-" + layer_num;
+mixin layer(LAYERS_ID, layer_num, active=false)
+  - var LAYER_ID = LAYERS_ID + "-" + layer_num;
 
   .panel.panel-default.layer&attributes({'data-layer-number': layer_num})
       .panel-heading(role="tab")
@@ -17,16 +17,16 @@ mixin layer(layersID, layer_num, active=false)
             data-toggle="collapse"
             aria-expanded="true"
           )&attributes({
-            'data-parent': "#" + layersID,
-            'href': "#" + layerID,
-            'aria-controls': layerID
+            'data-parent': "#" + LAYERS_ID,
+            'href': "#" + LAYER_ID,
+            'aria-controls': LAYER_ID
           })
             span.glyphicon.glyphicon-chevron-up&attributes({class: active ? "active" : ""})
             |
             | Layer #{layer_num}
 
       .panel-collapse.collapse(role="tabpanel")&attributes({
-        id: layerID,
+        id: LAYER_ID,
         class: active ? "in" : ""
       })
         .panel-body
@@ -40,7 +40,6 @@ mixin layer(layersID, layer_num, active=false)
                 name="container"
                 autocomplete="off"
               )
-              |
               | fixed
             label.btn.btn-default.btn-xs(
               data-toggle="tooltip"
@@ -51,10 +50,9 @@ mixin layer(layersID, layer_num, active=false)
                 name="container"
                 autocomplete="off"
               )
-              |
               | full
 
-          - var rowsID = layerID + "-rows";
+          - var ROWS_ID = LAYER_ID + "-rows";
           - var DEFAULT_NUM_OF_ROW = 2;
 
           .margin-top
@@ -65,10 +63,10 @@ mixin layer(layersID, layer_num, active=false)
               role="tablist"
               aria-multiselectable="true"
             )&attributes({
-              id: rowsID,
+              id: ROWS_ID,
               'data-counter': DEFAULT_NUM_OF_ROW
             })
               - var row_num = 1;
               while row_num <= DEFAULT_NUM_OF_ROW
-                +layer_row(rowsID, row_num, row_num === 1) // row_num === 1 means open first row
+                +layer_row(ROWS_ID, row_num, row_num === 1) // row_num === 1 means open first row
                 - row_num++

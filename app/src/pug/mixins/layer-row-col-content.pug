@@ -1,4 +1,4 @@
-mixin layer_row_col_content(colContent)
+mixin layer_row_col_content(COL_CONTENT_ID)
   .dropdown
     button.btn.btn-default.btn-xs.dropdown-toggle(
       type="button"
@@ -6,17 +6,32 @@ mixin layer_row_col_content(colContent)
       data-toggle="dropdown"
       aria-haspopup="true"
       aria-expanded="true"
-    )&attributes({id: colContent + "-dropdown-menu"})
+    )&attributes({id: COL_CONTENT_ID + "-dropdown-menu"})
       span.glyphicon.glyphicon-cog
       |
       | Options
 
-    .dropdown-menu&attributes({'aria-labelledby': colContent + "-dropdown-menu"})
-      p Hello world
-      p Hello world
-      p Hello world
-      p Hello world
-      p Hello world
+    .dropdown-menu&attributes({'aria-labelledby': COL_CONTENT_ID + "-dropdown-menu"})
+      li.dropdown-header
+        | Enable/Disable
+      li
+        .item
+          .checkbox.no-margin-top
+            label
+              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_offset"})
+              | Offset
+
+        .item
+          .checkbox.no-margin-top
+            label
+              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_push_pull"})
+              | Push Pull
+
+        .item
+          .checkbox.no-margin-top
+            label
+              input(type="checkbox")&attributes({name: COL_CONTENT_ID + "-option_nesting_column"})
+              | Nesting Column
 
   .row
     .col-xs-4
@@ -31,7 +46,6 @@ mixin layer_row_col_content(colContent)
                   name="col-xs"
                   autocomplete="off"
                 )
-                |
                 | xs
           input.form-control(
             type="number"
@@ -49,7 +63,6 @@ mixin layer_row_col_content(colContent)
                   name="col-sm"
                   autocomplete="off"
                 )
-                |
                 | sm
           input.form-control(
             type="number"
@@ -67,7 +80,6 @@ mixin layer_row_col_content(colContent)
                   name="col-md"
                   autocomplete="off"
                 )
-                |
                 | md
           input.form-control(
             type="number"
@@ -85,7 +97,6 @@ mixin layer_row_col_content(colContent)
                   name="col-lg"
                   autocomplete="off"
                 )
-                |
                 | lg
           input.form-control(
             type="number"
@@ -107,7 +118,6 @@ mixin layer_row_col_content(colContent)
                   name="col-xs"
                   autocomplete="off"
                 )
-                |
                 | xs
           input.form-control(
             type="number"
@@ -125,7 +135,6 @@ mixin layer_row_col_content(colContent)
                   name="col-sm"
                   autocomplete="off"
                 )
-                |
                 | sm
           input.form-control(
             type="number"
@@ -143,7 +152,6 @@ mixin layer_row_col_content(colContent)
                   name="col-md"
                   autocomplete="off"
                 )
-                |
                 | md
           input.form-control(
             type="number"
@@ -161,7 +169,6 @@ mixin layer_row_col_content(colContent)
                   name="col-lg"
                   autocomplete="off"
                 )
-                |
                 | lg
           input.form-control(
             type="number"
@@ -183,7 +190,6 @@ mixin layer_row_col_content(colContent)
                   name="col-xs"
                   autocomplete="off"
                 )
-                |
                 | xs
           input.form-control(
             type="number"
@@ -201,7 +207,6 @@ mixin layer_row_col_content(colContent)
                   name="col-sm"
                   autocomplete="off"
                 )
-                |
                 | sm
           input.form-control(
             type="number"
@@ -219,7 +224,6 @@ mixin layer_row_col_content(colContent)
                   name="col-md"
                   autocomplete="off"
                 )
-                |
                 | md
           input.form-control(
             type="number"
@@ -237,7 +241,6 @@ mixin layer_row_col_content(colContent)
                   name="col-lg"
                   autocomplete="off"
                 )
-                |
                 | lg
           input.form-control(
             type="number"
@@ -246,3 +249,12 @@ mixin layer_row_col_content(colContent)
             min="1"
             max="12"
           )
+
+  .row
+    .col-xs-12
+      hr.margin-bottom-5
+
+      button.btn.btn-info.btn-xs.add-nesting-column
+        span.glyphicon.glyphicon-plus
+        |
+        | Add Row
