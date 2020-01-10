@@ -4,69 +4,142 @@ mixin layer(LAYERS_ID, layer_num, active=false)
   - var LAYER_ID = LAYERS_ID + "-" + layer_num;
 
   .panel.panel-default.layer(data-layer-number=layer_num)
-      .panel-heading(role="tab")
-        .pull-right.layer-button
-          button.btn.btn-danger.btn-xs.delete-layer(
-            data-toggle="tooltip"
-            title="Delete Layer"
-            data-layer-name="Layer " + layer_num
-          )
-            span.glyphicon.glyphicon-trash
+    .panel-heading(role="tab")
+      .pull-right.layer-button
+        button.btn.btn-danger.btn-xs.delete-layer(
+          data-toggle="tooltip"
+          title="Delete Layer"
+          data-layer-name="Layer " + layer_num
+        )
+          span.glyphicon.glyphicon-trash
 
-        h4.panel-title
-          a.layer-btn(
-            data-toggle="collapse"
-            aria-expanded="true"
-            data-parent="#" + LAYERS_ID
-            href="#" + LAYER_ID
-            aria-controls=LAYER_ID
-          )
-            span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
-            |
-            | Layer #{layer_num}
+      h4.panel-title
+        a.layer-btn(
+          data-toggle="collapse"
+          aria-expanded="true"
+          data-parent="#" + LAYERS_ID
+          href="#" + LAYER_ID
+          aria-controls=LAYER_ID
+        )
+          span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
+          |
+          | Layer !{layer_num}
 
-      .panel-collapse.collapse(
-        role="tabpanel"
-        id=LAYER_ID
-        class=active ? "in" : ""
+    .panel-collapse.collapse(
+      role="tabpanel"
+      id=LAYER_ID
+      class=active ? "in" : ""
+    )
+      .panel-body
+        +layer_content(LAYER_ID)
+
+mixin layer_content(LAYER_ID, num_of_row=2)
+  .btn-group.container-choices(data-toggle="buttons")
+    label.btn.btn-default.btn-xs.active(
+      data-toggle="tooltip"
+      title="container"
+    )
+      input(
+        type="radio"
+        autocomplete="off"
+        name=LAYER_ID + "-container_container"
       )
-        .panel-body
-          .btn-group.container-choices(data-toggle="buttons")
-            label.btn.btn-default.btn-xs.active(
-              data-toggle="tooltip"
-              title="container"
-            )
-              input(
-                type="radio"
-                autocomplete="off"
-                name=LAYER_ID + "-container_container"
-              )
-              | fixed
-            label.btn.btn-default.btn-xs(
-              data-toggle="tooltip"
-              title="container-fluid"
-            )
-              input(
-                type="radio"
-                autocomplete="off"
-                name=LAYER_ID + "-container_container_fluid"
-              )
-              | full
+      | fixed
+    label.btn.btn-default.btn-xs(
+      data-toggle="tooltip"
+      title="container-fluid"
+    )
+      input(
+        type="radio"
+        autocomplete="off"
+        name=LAYER_ID + "-container_container_fluid"
+      )
+      | full
 
-          - var ROWS_ID = LAYER_ID + "-rows";
-          - var DEFAULT_NUM_OF_ROW = 2;
+  - var ROWS_ID = LAYER_ID + "-rows";
 
-          .margin-top
-            button.btn.btn-info.btn-xs.add-layer-row
-              span.glyphicon.glyphicon-plus
+  .margin-top
+    button.btn.btn-info.btn-xs.add-layer-row
+      span.glyphicon.glyphicon-plus
 
-            .panel-group.panel-layers-rows(
-              role="tablist"
-              aria-multiselectable="true"
-              id=ROWS_ID
-              data-counter=DEFAULT_NUM_OF_ROW
-            )
-              - var row_num = 1;
-              while row_num <= DEFAULT_NUM_OF_ROW
-                +layer_row(ROWS_ID, row_num, row_num === 1) // row_num === 1 means open first row
-                - row_num++
+    .panel-group.panel-layers-rows(
+      role="tablist"
+      aria-multiselectable="true"
+      id=ROWS_ID
+      data-counter=num_of_row
+    )
+      - var row_num = 1;
+      while row_num <= num_of_row
+        +layer_row(ROWS_ID, row_num, row_num === 1) // row_num === 1 means open first row
+        - row_num++
+
+mixin layer_tmpl(LAYERS_ID, active=false)
+  - var LAYER_ID = LAYERS_ID + "-<%= layer_num %>";
+
+  .panel.panel-default.layer(data-layer-number!="<%= layer_num %>")
+    .panel-heading(role="tab")
+      .pull-right.layer-button
+        button.btn.btn-danger.btn-xs.delete-layer(
+          data-toggle="tooltip"
+          title="Delete Layer"
+          data-layer-name!="Layer <%= layer_num %>"
+        )
+          span.glyphicon.glyphicon-trash
+
+      h4.panel-title
+        a.layer-btn(
+          data-toggle="collapse"
+          aria-expanded="true"
+          data-parent!="#" + LAYERS_ID
+          href!="#" + LAYER_ID
+          aria-controls!=LAYER_ID
+        )
+          span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
+          |
+          | Layer <%= layer_num %>
+
+    .panel-collapse.collapse(
+      role="tabpanel"
+      id!=LAYER_ID
+      class=active ? "in" : ""
+    )
+      .panel-body
+        +layer_content_tmpl(LAYER_ID)
+
+mixin layer_content_tmpl(LAYER_ID)
+  .btn-group.container-choices(data-toggle="buttons")
+    label.btn.btn-default.btn-xs.active(
+      data-toggle="tooltip"
+      title="container"
+    )
+      input(
+        type="radio"
+        autocomplete="off"
+        name!=LAYER_ID + "-container_container"
+      )
+      | fixed
+    label.btn.btn-default.btn-xs(
+      data-toggle="tooltip"
+      title="container-fluid"
+    )
+      input(
+        type="radio"
+        autocomplete="off"
+        name!=LAYER_ID + "-container_container_fluid"
+      )
+      | full
+
+  - var ROWS_ID = LAYER_ID + "-rows";
+
+  .margin-top
+    button.btn.btn-info.btn-xs.add-layer-row
+      span.glyphicon.glyphicon-plus
+      |
+      | Add Row
+
+    .panel-group.panel-layers-rows(
+      role="tablist"
+      aria-multiselectable="true"
+      id!=ROWS_ID
+      data-counter=0
+    )

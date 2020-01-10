@@ -345,8 +345,8 @@ var Bs3Editor;
           LayerRow.incrementCounter(rowsEl);
           rowsEl.append(tmpl({
             layer_num: layerNum,
-            row_number: LayerRow.getCounter(rowsEl),
-            row_content: "Lorem ipsum"
+            row_num: LayerRow.getCounter(rowsEl),
+            // row_content: "Lorem ipsum"
           }));
 
           // initialize tooltip on new row
@@ -447,9 +447,8 @@ var Bs3Editor;
       },
 
       init: function() {
-        $('.add-layer-row-col', editorEl).click(LayerRowCol.onAdd);
-
         layersEl
+          .on("click", ".add-layer-row-col", LayerRowCol.onAdd)
           .on("click", ".layer-row-col .delete-layer-row-col", LayerRowCol.onDelete)
           .on("click", ".layer-row-col .layer-row-col-btn", LayerRowCol.onSelect)
           .on("mouseenter", ".layer-row-col .layer-row-col-btn", LayerRowCol.onMouseIn)
@@ -475,7 +474,7 @@ var Bs3Editor;
         var layerEl = $(this).closest('.layer');
         var layerRowEl = $(this).closest('.layer-row');
         var layerNum = layerEl.data('layer-number');
-        var layerRowNum = layerEl.data('layer-row-number');
+        var layerRowNum = layerRowEl.data('layer-row-number');
 
         var colsEl = $('.panel-layers-rows-cols', layerRowEl);
 
@@ -511,9 +510,9 @@ var Bs3Editor;
           LayerRowCol.incrementCounter(colsEl);
           colsEl.append(tmpl({
             layer_num: layerNum,
-            row_number: layerRowNum,
-            col_number: LayerRowCol.getCounter(colsEl),
-            col_content: "Lorem ipsum"
+            row_num: layerRowNum,
+            col_num: LayerRowCol.getCounter(colsEl),
+            // col_content: "Lorem ipsum"
           }));
 
           // initialize tooltip on new col

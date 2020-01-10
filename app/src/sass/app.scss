@@ -39,12 +39,16 @@
     @extend .layer-button
   }
 
-  .col-choices input {
-    height: 22px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 0;
-    width: 50px;
+  .column-choices,
+  .offset-choices,
+  .push-pull-choices {
+    input {
+      height: 22px;
+      padding-left: 5px;
+      padding-right: 5px;
+      border-radius: 0;
+      width: 50px;
+    }
   }
 
   /* overwrite bootstrap 3 inside of editor */

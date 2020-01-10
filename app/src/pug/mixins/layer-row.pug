@@ -31,32 +31,97 @@ mixin layer_row(ROWS_ID, row_num, active=false)
       class=active ? "in" : ""
     )
       .panel-body
-        .btn-group.gutter-choices(data-toggle="buttons")
-          label.btn.btn-default.btn-xs(
-            data-toggle="tooltip"
-            title="row-no-gutters"
-          )
-            input(
-              type="checkbox"
-              name="gutter"
-              autocomplete="off"
-            )
-            | No gutters
+        +layer_row_content(ROW_ID)
 
-        - var COLS_ID = ROW_ID + "-cols";
-        - var DEFAULT_NUM_OF_COL = 2;
+mixin layer_row_content(ROW_ID, num_of_col=2)
+  .btn-group.gutter-choices(data-toggle="buttons")
+    label.btn.btn-default.btn-xs(
+      data-toggle="tooltip"
+      title="row-no-gutters"
+    )
+      input(
+        type="checkbox"
+        name="gutter"
+        autocomplete="off"
+      )
+      | No gutters
 
-        .margin-top
-          button.btn.btn-success.btn-xs.add-layer-row-col
-            span.glyphicon.glyphicon-plus
+  - var COLS_ID = ROW_ID + "-cols";
 
-          .panel-group.panel-layers-rows-cols(
-            role="tablist"
-            aria-multiselectable="true"
-            id=COLS_ID
-            data-counter=DEFAULT_NUM_OF_COL
-          )
-            - var col_num = 1;
-            while col_num <= DEFAULT_NUM_OF_COL
-              +layer_row_col(COLS_ID, col_num, col_num === 1) // col_num === 1 means open first row
-              - col_num++
+  .margin-top
+    button.btn.btn-success.btn-xs.add-layer-row-col
+      span.glyphicon.glyphicon-plus
+
+    .panel-group.panel-layers-rows-cols(
+      role="tablist"
+      aria-multiselectable="true"
+      id=COLS_ID
+      data-counter=num_of_col
+    )
+      - var col_num = 1;
+      while col_num <= num_of_col
+        +layer_row_col(COLS_ID, col_num, col_num === 1) // col_num === 1 means open first row
+        - col_num++
+
+mixin layer_row_tmpl(LAYERS_ID, active=false)
+  - var LAYER_ID = LAYERS_ID + "-<%= layer_num %>";
+  - var ROWS_ID = LAYER_ID + "-rows";
+  - var ROW_ID = ROWS_ID + "-<%= row_num %>";
+
+  .panel.panel-default.layer-row(data-layer-row-number!="<%= row_num %>")
+    .panel-heading(role="tab")
+      .pull-right.row-button
+        button.btn.btn-danger.btn-xs.delete-layer-row(
+          data-toggle="tooltip"
+          title="Delete Row"
+          data-row-name!="Row <%= row_num %>"
+        )
+          span.glyphicon.glyphicon-trash
+
+      h4.panel-title
+        a.layer-row-btn(
+          data-toggle="collapse"
+          aria-expanded="true"
+          data-parent!="#" + ROWS_ID
+          href!="#" + ROW_ID
+          aria-controls!=ROW_ID
+        )
+          span.glyphicon.glyphicon-chevron-up(class=active ? "active" : "")
+          |
+          | Row <%= row_num %>
+
+    .panel-collapse.collapse(
+      role="tabpanel"
+      id!=ROW_ID
+      class=active ? "in" : ""
+    )
+      .panel-body
+        +layer_row_content_tmpl(ROW_ID)
+
+mixin layer_row_content_tmpl(ROW_ID)
+  .btn-group.gutter-choices(data-toggle="buttons")
+    label.btn.btn-default.btn-xs(
+      data-toggle="tooltip"
+      title="row-no-gutters"
+    )
+      input(
+        type="checkbox"
+        name="gutter"
+        autocomplete="off"
+      )
+      | No gutters
+
+  - var COLS_ID = ROW_ID + "-cols";
+
+  .margin-top
+    button.btn.btn-success.btn-xs.add-layer-row-col
+      span.glyphicon.glyphicon-plus
+      |
+      | Add Col
+
+    .panel-group.panel-layers-rows-cols(
+      role="tablist"
+      aria-multiselectable="true"
+      id!=COLS_ID
+      data-counter=0
+    )
