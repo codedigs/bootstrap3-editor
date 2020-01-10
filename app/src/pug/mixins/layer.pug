@@ -37,9 +37,8 @@ mixin layer(LAYERS_ID, layer_num, active=false)
             )
               input(
                 type="radio"
-                name="container"
                 autocomplete="off"
-              )
+              )&attributes({name: LAYER_ID + "-container_container"})
               | fixed
             label.btn.btn-default.btn-xs(
               data-toggle="tooltip"
@@ -47,9 +46,8 @@ mixin layer(LAYERS_ID, layer_num, active=false)
             )
               input(
                 type="radio"
-                name="container"
                 autocomplete="off"
-              )
+              )&attributes({name: LAYER_ID + "-container_container_fluid"})
               | full
 
           - var ROWS_ID = LAYER_ID + "-rows";

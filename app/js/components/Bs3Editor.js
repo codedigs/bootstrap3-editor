@@ -188,7 +188,7 @@ var Bs3Editor;
           Layer.incrementCounter();
           layersEl.append(tmpl({
             layer_num: Layer.getCounter(),
-            layer_content: "Lorem ipsum"
+            // layer_content: "Lorem ipsum"
           }));
 
           // initialize tooltip on new row
@@ -289,9 +289,8 @@ var Bs3Editor;
       },
 
       init: function() {
-        $('.add-layer-row', editorEl).click(LayerRow.onAdd);
-
         layersEl
+          .on("click", ".add-layer-row", LayerRow.onAdd)
           .on("click", ".layer-row .delete-layer-row", LayerRow.onDelete)
           .on("click", ".layer-row .layer-row-btn", LayerRow.onSelect)
           .on("mouseenter", ".layer-row .layer-row-btn", LayerRow.onMouseIn)

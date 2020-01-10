@@ -34,10 +34,13 @@ html(lang="en")
 
                 .panel-body
                   - var LAYERS_ID = "bs3-ed-layers";
-                  - var DEFAULT_NUM_OF_LAYER = 3;
+                  - var DEFAULT_NUM_OF_LAYER = 0;
 
                   button.btn.btn-primary.btn-xs.add-layer
                     span.glyphicon.glyphicon-plus
+                    if DEFAULT_NUM_OF_LAYER < 1
+                      |
+                      | Add Layer
 
                   .panel-group.panel-layers(
                     role="tablist"
@@ -72,13 +75,47 @@ html(lang="en")
               'data-parent': "#" + LAYERS_ID
             })
               span.glyphicon.glyphicon-chevron-up
+              |
               | Layer <%= layer_num %>
 
         .panel-collapse.collapse(
           id!="bs3-ed-layer<%= layer_num %>"
           role="tabpanel"
         )
-          .panel-body <%= layer_content %>
+          .panel-body
+            .btn-group.container-choices(data-toggle="buttons")
+              label.btn.btn-default.btn-xs.active(
+                data-toggle="tooltip"
+                title="container"
+              )
+                input(
+                  type="radio"
+                  autocomplete="off"
+                )&attributes({name: LAYERS_ID + "-<%= layer_num %>-container_container"})
+                | fixed
+              label.btn.btn-default.btn-xs(
+                data-toggle="tooltip"
+                title="container-fluid"
+              )
+                input(
+                  type="radio"
+                  autocomplete="off"
+                )&attributes({name: LAYERS_ID + "-<%= layer_num %>-container_container_fluid"})
+                | full
+
+            - var DEFAULT_NUM_OF_ROW = 0;
+
+            .margin-top
+              button.btn.btn-info.btn-xs.add-layer-row
+                span.glyphicon.glyphicon-plus
+
+              .panel-group.panel-layers-rows(
+                role="tablist"
+                aria-multiselectable="true"
+              )&attributes({
+                id: LAYERS_ID + "-<%= layer_num %>-rows",
+                'data-counter': DEFAULT_NUM_OF_ROW
+              })
 
     script(type="text/template" id="layer-row-tmpl")
       .panel.panel-default.layer-row(data-layer-row-number!="<%= row_number %>")
