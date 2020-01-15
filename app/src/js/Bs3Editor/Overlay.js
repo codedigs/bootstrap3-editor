@@ -26,9 +26,9 @@ Overlay.eventListeners = {
         .parent().removeClass("col-xs-4");
 
       $('.panel-heading .move-tool', Overlay.editorEl)
-        .mousedown(DragEvent.eventListeners.onReadyToDrag)
-        .mousemove(DragEvent.eventListeners.onDragging)
-        .on("mouseup mouseleave", DragEvent.eventListeners.onStopToDrag);
+        .mousedown(Overlay.eventListeners.onReadyToDrag)
+        .mousemove(Overlay.eventListeners.onDragging)
+        .on("mouseup mouseleave", Overlay.eventListeners.onStopToDrag);
 
       $('.panel-heading .move-tool', Overlay.editorEl).show();
 
@@ -45,9 +45,9 @@ Overlay.eventListeners = {
         .parent()
         .parent().addClass("col-xs-4");
 
-      $('.panel-heading .move-tool', Overlay.editorEl).off("mousedown", DragEvent.eventListeners.onReadyToDrag)
-        .off("mousemove", DragEvent.eventListeners.onDragging)
-        .off("mouseup mouseleave", DragEvent.eventListeners.onStopToDrag);
+      $('.panel-heading .move-tool', Overlay.editorEl).off("mousedown", Overlay.eventListeners.onReadyToDrag)
+        .off("mousemove", Overlay.eventListeners.onDragging)
+        .off("mouseup mouseleave", Overlay.eventListeners.onStopToDrag);
 
       $('.panel-heading .move-tool', Overlay.editorEl).hide();
     }
@@ -77,14 +77,14 @@ Overlay.eventListeners = {
     };
 
     if (is_collided(moveToolPos, cursorPos)) {
-      DragEvent.readyToDrag = true;
-      DragEvent.initialCursorCoor = {
+      Overlay.readyToDrag = true;
+      Overlay.initialCursorCoor = {
         x: e.pageX,
         y: e.pageY
       };
 
       var offset = Overlay.editorEl.offset();
-      DragEvent.initialEditorCoor = {
+      Overlay.initialEditorCoor = {
         x: offset.left,
         y: offset.top
       };
@@ -92,19 +92,19 @@ Overlay.eventListeners = {
   },
 
   onDragging: function(e) {
-    if (DragEvent.readyToDrag) {
-      var top = e.pageY - DragEvent.initialCursorCoor.y;
-      var left = e.pageX - DragEvent.initialCursorCoor.x;
+    if (Overlay.readyToDrag) {
+      var top = e.pageY - Overlay.initialCursorCoor.y;
+      var left = e.pageX - Overlay.initialCursorCoor.x;
 
       Overlay.editorEl.css({
-        top: DragEvent.initialEditorCoor.y + top,
-        left: DragEvent.initialEditorCoor.x + left
+        top: Overlay.initialEditorCoor.y + top,
+        left: Overlay.initialEditorCoor.x + left
       });
     }
   },
 
   onStopToDrag: function() {
-    DragEvent.readyToDrag = false;
+    Overlay.readyToDrag = false;
   }
 };
 
