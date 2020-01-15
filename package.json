@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "node node_modules/.bin/df-cli init",
-    "serve": "node node_modules/.bin/df-cli serve --watch='pug'",
+    "serve": "node node_modules/.bin/df-cli serve --watch='pug,js'",
     "build": "node node_modules/.bin/df-cli build"
   },
   "author": "Rodrigo Galura III<rodrigogalura3rd@gmail.com>",

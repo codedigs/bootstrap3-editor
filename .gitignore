@@ -3,6 +3,7 @@
 /**/yarn-error.log
 /app/**/*.html
 /app/css
+/app/js
 /dist
 /dfconfig.js
 /report.*.json

@@ -4,7 +4,7 @@
  * - smokejs
  */
 
-function smkAlert(smkOption) {
+window.smkAlert = function(smkOption) {
   var settings = $.extend({
     text: "Text content",
     position: "top-right",
@@ -12,9 +12,9 @@ function smkAlert(smkOption) {
   }, smkOption);
 
   $.smkAlert(settings);
-}
+};
 
-function smkConfirm(smkOption, callback) {
+window.smkConfirm = function(smkOption, callback) {
   var settings = $.extend({
     text: "Text content",
     accept: "Ok",
@@ -22,4 +22,4 @@ function smkConfirm(smkOption, callback) {
   }, smkOption);
 
   $.smkConfirm(settings, callback);
-}
+};
