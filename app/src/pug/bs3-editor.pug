@@ -1,0 +1,28 @@
+include mixins/layer.pug
+
+.editor#bs3-editor
+  .panel.panel-primary
+    .panel-heading
+      span.glyphicon.glyphicon-move.move-tool.no-select
+      h1.panel-title.no-select Bootstrap 3 Editor
+
+    .panel-body
+      - var LAYERS_ID = "bs3-ed-layers";
+      - var DEFAULT_NUM_OF_LAYER = 2;
+
+      button.btn.btn-primary.btn-xs.add-layer
+        span.glyphicon.glyphicon-plus
+        if DEFAULT_NUM_OF_LAYER < 1
+          |
+          | Add Layer
+
+      .panel-group.panel-layers(
+        role="tablist"
+        aria-multiselectable="true"
+        id=LAYERS_ID
+        data-counter=DEFAULT_NUM_OF_LAYER
+      )
+        - var layer_num = 1;
+        while layer_num <= DEFAULT_NUM_OF_LAYER
+          +layer(LAYERS_ID, layer_num, layer_num === 1) // layer_num === 1 means open first layer
+          - layer_num++

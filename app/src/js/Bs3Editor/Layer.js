@@ -78,8 +78,11 @@ Layer.eventListeners = {
         // layer_content: "Lorem ipsum"
       }));
 
-      // initialize tooltip on new row
+      // initialize tooltip on new layer
       $('.delete-layer:last[data-toggle="tooltip"]', Layer.layersEl).tooltip();
+
+      // open new layer
+      $('.layer .layer-btn:last', Layer.layersEl).click();
     };
 
     before();

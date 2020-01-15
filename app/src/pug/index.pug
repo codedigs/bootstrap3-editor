@@ -14,46 +14,18 @@ html(lang="en")
     link(rel="stylesheet" href="./css/app.css")
     // endbuild
   body
+    include bs3-editor.pug
+
     .container-fluid
       .row
-        .col-xs-8
+        .col-xs-12
           .playground#playground
+            .container
+              .row
+                .col-md-12
+                  h1.page-header Hello World
 
-        .col-xs-4
-          .margin-top.margin-right
-            .editor#bs3-editor
-              .panel.panel-primary
-                .panel-heading
-                  span.glyphicon.glyphicon-move.move-tool.no-select(style="display: none")
-
-                  .checkbox.pull-right.no-margin-top
-                    label.cursor-pointer.no-select
-                      input(type="checkbox" name="overlay")
-                      | Overlay
-
-                  h1.panel-title.no-select Bootstrap 3 Editor
-
-                .panel-body
-                  - var LAYERS_ID = "bs3-ed-layers";
-                  - var DEFAULT_NUM_OF_LAYER = 2;
-
-                  button.btn.btn-primary.btn-xs.add-layer
-                    span.glyphicon.glyphicon-plus
-                    if DEFAULT_NUM_OF_LAYER < 1
-                      |
-                      | Add Layer
-
-                  .panel-group.panel-layers(
-                    role="tablist"
-                    aria-multiselectable="true"
-                    id=LAYERS_ID
-                    data-counter=DEFAULT_NUM_OF_LAYER
-                  )
-                    - var layer_num = 1;
-                    while layer_num <= DEFAULT_NUM_OF_LAYER
-                      +layer(LAYERS_ID, layer_num, layer_num === 1) // layer_num === 1 means open first layer
-                      - layer_num++
-
+    - var LAYERS_ID = "bs3-ed-layers";
     script(type="text/template" id="layer-tmpl")
       +layer_tmpl(LAYERS_ID)
 

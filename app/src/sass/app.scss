@@ -6,10 +6,6 @@
   margin: 15px 0;
 }
 
-.overlay {
-  position: absolute;
-}
-
 .move-tool {
   position: absolute;
   top: -31px;
@@ -23,19 +19,21 @@
 }
 
 .editor {
-  &.overlay {
-    width: calc(33.33% - 30px);
-    top: 0;
-    right: 0;
-    z-index: 1;
+  $OFFSET: 15px;
+  $MOVE_TOOL_ICON: 31px;
 
-    @media (max-width: bs3-screen-xs()) {
-      width: calc(100% - 30px);
-    }
+  position: fixed;
+  z-index: 1;
+  top: $OFFSET + $MOVE_TOOL_ICON;
+  right: $OFFSET;
+  width: calc(33.33% - 30px);
 
-    @media (max-width: bs3-screen-md-max()) {
-      width: calc(50% - 30px);
-    }
+  @media (max-width: bs3-screen-xs()) {
+    width: calc(100% - 30px);
+  }
+
+  @media (max-width: bs3-screen-md-max()) {
+    width: calc(50% - 30px);
   }
 
   .layer-button {
@@ -87,6 +85,11 @@
 
     &-body {
       padding: 5px;
+    }
+
+    & > .panel-body {
+      overflow: auto;
+      max-height: 600px;
     }
 
     &-layers,
