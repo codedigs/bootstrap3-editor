@@ -6,6 +6,15 @@
   margin: 15px 0;
 }
 
+.grid-info {
+  margin-top: -6px;
+
+  .label {
+    border-radius: 0;
+    font-size: 58%;
+  }
+}
+
 .move-tool {
   position: absolute;
   top: -31px;

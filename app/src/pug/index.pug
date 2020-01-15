@@ -14,16 +14,18 @@ html(lang="en")
     link(rel="stylesheet" href="./css/app.css")
     // endbuild
   body
-    include bs3-editor.pug
+    //- include bs3-editor.pug
 
-    .container-fluid
-      .row
-        .col-xs-12
-          .playground#playground
-            .container
-              .row
-                .col-md-12
-                  h1.page-header Hello World
+    .grid-info
+      span.label.label-warning Playground
+    .playground#playground
+
+      .grid-info
+        span.grid-info.label.label-primary Layer 1
+      .container-fluid
+        .row
+          .col-md-12
+            h1.page-header Hello World
 
     - var LAYERS_ID = "bs3-ed-layers";
     script(type="text/template" id="layer-tmpl")
