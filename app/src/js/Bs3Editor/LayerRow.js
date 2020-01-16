@@ -39,51 +39,74 @@ LayerRow.incrementCounter = function(rowsEl) {
 LayerRow.eventListeners = {
   onAdd: function() {
     var _this = this;
+    var tmp = {};
     var layerEl = $(this).closest('.layer');
-    var layerNum = layerEl.data('layer-number');
+    var layer_num = layerEl.data('layer-number');
     var rowsEl = $('.panel-layers-rows', layerEl);
 
-    var before = function() {
-      $(_this).prop("disabled", true);
+    tmp.editor = {
+      before: function() {
+        $(_this).prop("disabled", true);
 
-      var hasRow = $('.layer-row', rowsEl).length > 0;
+        var hasRow = $('.layer-row', rowsEl).length > 0;
 
-      if (hasRow) {
-        $(_this).prop("disabled", false);
-        during();
-      } else {
-        $(_this).animate({
-          width: 24
-        }, LayerRow.TRANSITION, function() {
-          $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+        if (hasRow) {
           $(_this).prop("disabled", false);
-          $(_this).tooltip({
-            title: "Add Row"
+          tmp.editor.during();
+        } else {
+          $(_this).animate({
+            width: 24
+          }, LayerRow.TRANSITION, function() {
+            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+            $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              title: "Add Row"
+            });
+
+            tmp.editor.during();
           });
+        }
 
-          during();
-        });
+        // remove tooltip
+        $(_this).tooltip("hide");
+      },
+
+      during: function() {
+        var tmpl = _.template($('#layer-row-tmpl').html());
+
+        LayerRow.incrementCounter(rowsEl);
+        rowsEl.append(tmpl({
+          layer_num: layer_num,
+          row_num: LayerRow.getCounter(rowsEl),
+          // row_content: "Lorem ipsum"
+        }));
+
+        // initialize tooltip on new row
+        $('.delete-layer-row:last[data-toggle="tooltip"]', rowsEl).tooltip();
+
+        tmp.playground();
       }
-
-      // remove tooltip
-      $(_this).tooltip("hide");
     };
 
-    var during = function() {
-      var tmpl = _.template($('#layer-row-tmpl').html());
+    tmp.playground = function() {
+      var tmpl = _.template($('#row-tmpl').html());
+      var row_num = LayerRow.getCounter(rowsEl);
 
-      LayerRow.incrementCounter(rowsEl);
-      rowsEl.append(tmpl({
-        layer_num: layerNum,
-        row_num: LayerRow.getCounter(rowsEl),
-        // row_content: "Lorem ipsum"
+      var pgLayerEl = $('.pg-layer[data-num="'+layer_num+'"]', LayerRow.pgEl);
+      pgLayerEl.append(tmpl({
+        num: row_num
       }));
 
-      // initialize tooltip on new row
-      $('.delete-layer-row:last[data-toggle="tooltip"]', rowsEl).tooltip();
+      var pgRowEl = $('.pg-row[data-num="'+row_num+'"]', pgLayerEl);
+
+      var gridInfoTmpl = _.template($('#grid-info-tmpl').html());
+      pgRowEl.prepend(gridInfoTmpl({
+        block: "row",
+        content: "Row " + row_num
+      }));
     };
 
-    before();
+    tmp.editor.before();
   },
 
   onDelete: function() {

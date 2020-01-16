@@ -10,7 +10,6 @@ Overlay.init = function(editorEl) {
     Overlay.initialized = true;
     Overlay.editorEl = editorEl;
 
-    $(':input[name="overlay"]', Overlay.editorEl).click(Overlay.eventListeners.onClick);
     $('.panel-heading .move-tool', Overlay.editorEl)
       .mousedown(Overlay.eventListeners.onReadyToDrag)
       .mousemove(Overlay.eventListeners.onDragging)

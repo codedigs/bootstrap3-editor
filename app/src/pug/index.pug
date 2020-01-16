@@ -62,10 +62,14 @@ html(lang="en")
       +layer_row_col_tmpl(LAYERS_ID)
 
     script(type="text-template" id="container-tmpl")
-      div(class!="container<%= (typeof fluid !== undefined) ? '-fluid' : '' %> pg-layer" data-name!="Layer <%= num %>")
+      div(
+        class!="container<%= (typeof fluid !== undefined) ? '-fluid' : '' %> pg-layer"
+        data-num!="<%= num %>"
+        data-name!="Layer <%= num %>"
+      )
 
     script(type="text-template" id="row-tmpl")
-      .row(data-name!="Row <%= num %>")
+      .row.pg-row(data-num!="<%= num %>" data-name!="Row <%= num %>")
 
     script(type="text-template" id="grid-info-tmpl")
       .grid-info

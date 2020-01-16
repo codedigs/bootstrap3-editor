@@ -3,9 +3,10 @@ function LayerRowCol() {}
 LayerRowCol.initialized = false;
 LayerRowCol.TRANSITION = 400;
 
-LayerRowCol.init = function(layersEl) {
+LayerRowCol.init = function(pgEl, layersEl) {
   if (!LayerRowCol.initialized) {
     LayerRowCol.initialized = true;
+    LayerRowCol.pgEl = pgEl;
     LayerRowCol.layersEl = layersEl;
 
     LayerRowCol.layersEl

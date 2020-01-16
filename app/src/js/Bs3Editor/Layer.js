@@ -3,9 +3,10 @@ function Layer() {}
 Layer.initialized = false;
 Layer.TRANSITION = 400;
 
-Layer.init = function(editorEl, layersEl) {
+Layer.init = function(pgEl, editorEl, layersEl) {
   if (!Layer.initialized) {
     Layer.initialized = true;
+    Layer.pgEl = pgEl;
     Layer.editorEl = editorEl;
     Layer.layersEl = layersEl;
 
@@ -42,17 +43,17 @@ Layer.incrementCounter = function() {
 Layer.eventListeners = {
   onAdd: function() {
     var _this = this;
+    var tmp = {};
 
-    var editor = function() {
-
-      var before = function() {
+    tmp.editor = {
+      before: function() {
         $(_this).prop("disabled", true);
 
         var hasLayer = $('.layer', Layer.layersEl).length > 0;
 
         if (hasLayer) {
           $(_this).prop("disabled", false);
-          during();
+          tmp.editor.during();
         } else {
           $(_this).animate({ // animate the button
             width: 24
@@ -63,15 +64,15 @@ Layer.eventListeners = {
               title: "Add Layer"
             });
 
-            during();
+            tmp.editor.during();
           });
         }
 
         // remove tooltip
         $(_this).tooltip("hide");
-      };
+      },
 
-      var during = function() {
+      during: function() {
         var tmpl = _.template($('#layer-tmpl').html());
 
         Layer.incrementCounter();
@@ -86,35 +87,33 @@ Layer.eventListeners = {
         // open new layer
         $('.layer .layer-btn:last', Layer.layersEl).click();
 
-        playground();
-      };
-
-      before();
+        tmp.playground();
+      }
     };
 
-    var playground = function() {
+    tmp.playground = function() {
       var tmpl = _.template($('#container-tmpl').html());
-      var pgEl = $('#playground');
       var layer_num = Layer.getCounter();
 
-      pgEl.append(tmpl({
+      Layer.pgEl.append(tmpl({
         num: layer_num
       }));
 
       var gridInfoTmpl = _.template($('#grid-info-tmpl').html());
-      $('> .pg-layer:last', pgEl).prepend(gridInfoTmpl({
+      $('> .pg-layer:last', Layer.pgEl).prepend(gridInfoTmpl({
         block: "container",
         content: "Layer " + layer_num
       }));
     };
 
-    editor();
+    tmp.editor.before();
   },
 
   onDelete: function() {
     var _this = this;
+    var tmp = {};
 
-    var before = function() {
+    tmp.before = function() {
       $(_this).prop("disabled", true);
 
       var layer_name = $(_this).data("layer-name");
@@ -123,20 +122,20 @@ Layer.eventListeners = {
         $(_this).prop("disabled", false);
 
         if (isYes) {
-          during();
+          tmp.during();
         }
       });
     };
 
-    var during = function() {
+    tmp.during = function() {
       $(_this).closest('.layer').fadeOut(function() {
         this.remove();
 
-        after();
+        tmp.after();
       });
     };
 
-    var after = function() {
+    tmp.after = function() {
       var hasLayer = $('.layer', Layer.layersEl).length > 0;
 
       if (!hasLayer) {
@@ -152,7 +151,7 @@ Layer.eventListeners = {
       }
     };
 
-    before();
+    tmp.before();
   },
 
   onSelect: function() {

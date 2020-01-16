@@ -1,3 +1,5 @@
+@import "./../bs3-vars";
+
 .playground {
   border: 1px solid black;
   margin: 15px 0;
@@ -18,7 +20,7 @@
 
     .container,
     .container-fluid {
-      border: 2px solid blue;
+      border: 2px solid $brand-primary;
       border-top-width: 1px;
 
       & > .grid-info {
@@ -26,7 +28,7 @@
       }
 
       .row {
-        border: 2px solid red;
+        border: 2px solid $brand-info;
         border-top-width: 1px;
 
         & > .grid-info {
@@ -34,7 +36,7 @@
         }
 
         [class^=col-] {
-          border: 2px solid green;
+          border: 2px solid $brand-success;
           border-top-width: 1px;
 
           & > .grid-info {
