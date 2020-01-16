@@ -3,9 +3,10 @@ function LayerRow() {}
 LayerRow.initialized = false;
 LayerRow.TRANSITION = 400;
 
-LayerRow.init = function(layersEl) {
+LayerRow.init = function(pgEl, layersEl) {
   if (!LayerRow.initialized) {
     LayerRow.initialized = true;
+    LayerRow.pgEl = pgEl;
     LayerRow.layersEl = layersEl;
 
     LayerRow.layersEl
@@ -41,7 +42,7 @@ LayerRow.eventListeners = {
     var _this = this;
     var tmp = {};
     var layerEl = $(this).closest('.layer');
-    var layer_num = layerEl.data('layer-number');
+    var layer_num = layerEl.data('number');
     var rowsEl = $('.panel-layers-rows', layerEl);
 
     tmp.editor = {
@@ -83,6 +84,9 @@ LayerRow.eventListeners = {
 
         // initialize tooltip on new row
         $('.delete-layer-row:last[data-toggle="tooltip"]', rowsEl).tooltip();
+
+        // open new row
+        $('.layer-row-btn:last', rowsEl).click();
 
         tmp.playground();
       }

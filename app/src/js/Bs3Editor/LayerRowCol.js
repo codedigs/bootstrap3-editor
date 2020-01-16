@@ -44,55 +44,82 @@ LayerRowCol.incrementCounter = function(colsEl) {
 LayerRowCol.eventListeners = {
   onAdd: function() {
     var _this = this;
+    var tmp = {};
     var layerEl = $(this).closest('.layer');
     var layerRowEl = $(this).closest('.layer-row');
-    var layerNum = layerEl.data('layer-number');
-    var layerRowNum = layerRowEl.data('layer-row-number');
+    var layer_num = layerEl.data('number');
+    var row_num = layerRowEl.data('number');
 
     var colsEl = $('.panel-layers-rows-cols', layerRowEl);
 
-    var before = function() {
-      $(_this).prop("disabled", true);
+    tmp.editor = {
+      before: function() {
+        $(_this).prop("disabled", true);
 
-      var hasCol = $('.layer-row-col', colsEl).length > 0;
+        var hasCol = $('.layer-row-col', colsEl).length > 0;
 
-      if (hasCol) {
-        $(_this).prop("disabled", false);
-        during();
-      } else {
-        $(_this).animate({
-          width: 24
-        }, LayerRowCol.TRANSITION, function() {
-          $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+        if (hasCol) {
           $(_this).prop("disabled", false);
-          $(_this).tooltip({
-            title: "Add Col"
+          tmp.editor.during();
+        } else {
+          $(_this).animate({
+            width: 24
+          }, LayerRowCol.TRANSITION, function() {
+            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+            $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              title: "Add Col"
+            });
+
+            tmp.editor.during();
           });
+        }
 
-          during();
-        });
+        // remove tooltip
+        $(_this).tooltip("hide");
+      },
+
+      during: function() {
+        var tmpl = _.template($('#layer-row-col-tmpl').html());
+
+        LayerRowCol.incrementCounter(colsEl);
+        colsEl.append(tmpl({
+          layer_num: layer_num,
+          row_num: row_num,
+          col_num: LayerRowCol.getCounter(colsEl),
+          // col_content: "Lorem ipsum"
+        }));
+
+        // initialize tooltip on new col
+        $('.delete-layer-row-col:last[data-toggle="tooltip"]', colsEl).tooltip();
+
+        // open new row
+        $('.layer-row-col-btn:last', colsEl).click();
+
+        tmp.playground();
       }
-
-      // remove tooltip
-      $(_this).tooltip("hide");
     };
 
-    var during = function() {
-      var tmpl = _.template($('#layer-row-col-tmpl').html());
+    tmp.playground = function() {
+      var tmpl = _.template($('#col-tmpl').html());
+      var col_num = LayerRowCol.getCounter(colsEl);
 
-      LayerRowCol.incrementCounter(colsEl);
-      colsEl.append(tmpl({
-        layer_num: layerNum,
-        row_num: layerRowNum,
-        col_num: LayerRowCol.getCounter(colsEl),
-        // col_content: "Lorem ipsum"
+      var pgLayerEl = $('.pg-layer[data-num="'+layer_num+'"]', LayerRowCol.pgEl);
+      var pgRowEl = $('.pg-row[data-num="'+layer_num+'"]', pgLayerEl);
+      pgRowEl.append(tmpl({
+        num: col_num
       }));
 
-      // initialize tooltip on new col
-      $('.delete-layer-row-col:last[data-toggle="tooltip"]', colsEl).tooltip();
+      var pgColEl = $('.pg-col[data-num="'+col_num+'"]', pgRowEl);
+
+      var gridInfoTmpl = _.template($('#grid-info-tmpl').html());
+      pgColEl.prepend(gridInfoTmpl({
+        block: "col",
+        content: "Col " + col_num
+      }));
     };
 
-    before();
+    tmp.editor.before();
   },
 
   onDelete: function() {

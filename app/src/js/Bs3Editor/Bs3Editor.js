@@ -17,7 +17,7 @@ Bs3Editor.init = function() {
     overlay.init(editorEl);
 
     layer.init(pgEl, editorEl, layersEl);
-    layerRow.init(layersEl);
+    layerRow.init(pgEl, layersEl);
     layerRowCol.init(pgEl, layersEl);
 
     $('input[name="show_grid"]', editorEl).click(Bs3Editor.eventListeners.onShowGrid);

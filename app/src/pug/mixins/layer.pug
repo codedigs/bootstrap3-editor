@@ -3,7 +3,7 @@ include layer-row.pug
 mixin layer(LAYERS_ID, layer_num, active=false)
   - var LAYER_ID = LAYERS_ID + "-" + layer_num;
 
-  .panel.panel-default.layer(data-layer-number=layer_num)
+  .panel.panel-default.layer(data-number=layer_num)
     .panel-heading(role="tab")
       .pull-right.layer-button
         button.btn.btn-danger.btn-xs.delete-layer(
@@ -68,7 +68,7 @@ mixin layer_content(LAYER_ID, num_of_row=2)
 mixin layer_tmpl(LAYERS_ID, active=false)
   - var LAYER_ID = LAYERS_ID + "-<%= layer_num %>";
 
-  .panel.panel-default.layer(data-layer-number!="<%= layer_num %>")
+  .panel.panel-default.layer(data-number!="<%= layer_num %>")
     .panel-heading(role="tab")
       .pull-right.layer-button
         button.btn.btn-danger.btn-xs.delete-layer(data-toggle="tooltip" title="Delete Layer" data-layer-name!="Layer <%= layer_num %>")

@@ -71,6 +71,9 @@ html(lang="en")
     script(type="text-template" id="row-tmpl")
       .row.pg-row(data-num!="<%= num %>" data-name!="Row <%= num %>")
 
+    script(type="text-template" id="col-tmpl")
+      .col-xs-12.pg-col(data-num!="<%= num %>" data-name!="Row <%= num %>")
+
     script(type="text-template" id="grid-info-tmpl")
       .grid-info
         <% var CONTAINER = "container"; %>

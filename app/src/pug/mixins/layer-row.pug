@@ -3,7 +3,7 @@ include layer-row-col.pug
 mixin layer_row(ROWS_ID, row_num, active=false)
   - var ROW_ID = ROWS_ID + "-" + row_num;
 
-  .panel.panel-default.layer-row(data-layer-row-number=row_num)
+  .panel.panel-default.layer-row(data-number=row_num)
     .panel-heading(role="tab")
       .pull-right.row-button
         button.btn.btn-danger.btn-xs.delete-layer-row(data-toggle="tooltip" title="Delete Row" data-row-name="Row " + row_num)
@@ -53,7 +53,7 @@ mixin layer_row_tmpl(LAYERS_ID, active=false)
   - var ROWS_ID = LAYER_ID + "-rows";
   - var ROW_ID = ROWS_ID + "-<%= row_num %>";
 
-  .panel.panel-default.layer-row(data-layer-row-number!="<%= row_num %>")
+  .panel.panel-default.layer-row(data-number!="<%= row_num %>")
     .panel-heading(role="tab")
       .pull-right.row-button
         button.btn.btn-danger.btn-xs.delete-layer-row(data-toggle="tooltip" title="Delete Row" data-row-name!="Row <%= row_num %>")
