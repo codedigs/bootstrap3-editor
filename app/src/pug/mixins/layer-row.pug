@@ -6,11 +6,7 @@ mixin layer_row(ROWS_ID, row_num, active=false)
   .panel.panel-default.layer-row(data-layer-row-number=row_num)
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row(
-          data-toggle="tooltip"
-          title="Delete Row"
-          data-row-name="Row " + row_num
-        )
+        button.btn.btn-danger.btn-xs.delete-layer-row(data-toggle="tooltip" title="Delete Row" data-row-name="Row " + row_num)
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
@@ -25,25 +21,14 @@ mixin layer_row(ROWS_ID, row_num, active=false)
           |
           | Row #{row_num}
 
-    .panel-collapse.collapse(
-      role="tabpanel"
-      id=ROW_ID
-      class=active ? "in" : ""
-    )
+    .panel-collapse.collapse(role="tabpanel" id=ROW_ID class=active ? "in" : "")
       .panel-body
         +layer_row_content(ROW_ID)
 
 mixin layer_row_content(ROW_ID, num_of_col=2)
   .btn-group.gutter-choices(data-toggle="buttons")
-    label.btn.btn-default.btn-xs(
-      data-toggle="tooltip"
-      title="row-no-gutters"
-    )
-      input(
-        type="checkbox"
-        name="gutter"
-        autocomplete="off"
-      )
+    label.btn.btn-default.btn-xs(data-toggle="tooltip" title="row-no-gutters")
+      input(type="checkbox" name="gutter" autocomplete="off")
       | No gutters
 
   - var COLS_ID = ROW_ID + "-cols";
@@ -71,11 +56,7 @@ mixin layer_row_tmpl(LAYERS_ID, active=false)
   .panel.panel-default.layer-row(data-layer-row-number!="<%= row_num %>")
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row(
-          data-toggle="tooltip"
-          title="Delete Row"
-          data-row-name!="Row <%= row_num %>"
-        )
+        button.btn.btn-danger.btn-xs.delete-layer-row(data-toggle="tooltip" title="Delete Row" data-row-name!="Row <%= row_num %>")
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
@@ -90,25 +71,14 @@ mixin layer_row_tmpl(LAYERS_ID, active=false)
           |
           | Row <%= row_num %>
 
-    .panel-collapse.collapse(
-      role="tabpanel"
-      id!=ROW_ID
-      class=active ? "in" : ""
-    )
+    .panel-collapse.collapse(role="tabpanel" id!=ROW_ID class=active ? "in" : "")
       .panel-body
         +layer_row_content_tmpl(ROW_ID)
 
 mixin layer_row_content_tmpl(ROW_ID)
   .btn-group.gutter-choices(data-toggle="buttons")
-    label.btn.btn-default.btn-xs(
-      data-toggle="tooltip"
-      title="row-no-gutters"
-    )
-      input(
-        type="checkbox"
-        name="gutter"
-        autocomplete="off"
-      )
+    label.btn.btn-default.btn-xs(data-toggle="tooltip" title="row-no-gutters")
+      input(type="checkbox" name="gutter" autocomplete="off")
       | No gutters
 
   - var COLS_ID = ROW_ID + "-cols";

@@ -4,11 +4,7 @@ mixin layer_row_col(COLS_ID, col_num, active=false)
   .panel.panel-default.layer-row-col(data-layer-row-col-number=col_num)
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row-col(
-          data-toggle="tooltip"
-          title="Delete Col"
-          data-col-name="Col " + col_num
-        )
+        button.btn.btn-danger.btn-xs.delete-layer-row-col(data-toggle="tooltip" title="Delete Col" data-col-name="Col " + col_num)
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
@@ -23,11 +19,7 @@ mixin layer_row_col(COLS_ID, col_num, active=false)
           |
           | Col #{col_num}
 
-    .panel-collapse.collapse(
-      role="tabpanel"
-      id=COL_ID
-      class=active ? "in" : ""
-    )
+    .panel-collapse.collapse(role="tabpanel" id=COL_ID class=active ? "in" : "")
       .panel-body
         +layer_row_col_content(COL_ID)
 
@@ -51,246 +43,141 @@ mixin layer_row_col_content(COL_ID)
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name=COL_ID + "-option_offset"
-              )
+              input(type="checkbox" name=COL_ID + "-option_offset")
               | Offset
 
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name=COL_ID + "-option_push_pull"
-              )
+              input(type="checkbox" name=COL_ID + "-option_push_pull")
               | Push Pull
 
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name=COL_ID + "-option_nesting_column"
-              )
+              input(type="checkbox" name=COL_ID + "-option_nesting_column")
               | Nesting Column
 
   .row
     .col-xs-4
       h4.no-margin-bottom Column
+
       .column-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-column_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-column_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name=COL_ID + "-column_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-column_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-column_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-column_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name=COL_ID + "-column_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-column_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-column_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-column_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name=COL_ID + "-column_md_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-column_md_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-column_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-column_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name=COL_ID + "-column_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-column_lg_val" autocomplete="off" min="1" max="12")
 
     .col-xs-4
       h4.no-margin-bottom Offset
+
       .offset-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-offset_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-offset_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name=COL_ID + "-offset_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-offset_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-offset_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-offset_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name=COL_ID + "-offset_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-offset_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-offset_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-offset_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name=COL_ID + "-offset_md_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-offset_md_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-offset_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-offset_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name=COL_ID + "-offset_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-offset_lg_val" autocomplete="off" min="1" max="12")
 
     .col-xs-4
       h4.no-margin-bottom Push Pull
+
       .push-pull-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-push-pull_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-push-pull_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name=COL_ID + "-push-pull_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-push-pull_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-push-pull_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-push-pull_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name=COL_ID + "-push-pull_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-push-pull_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-push-pull_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-push-pull_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name=COL_ID + "-push-pull_md_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-push-pull_md_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name=COL_ID + "-push-pull_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name=COL_ID + "-push-pull_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name=COL_ID + "-push-pull_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name=COL_ID + "-push-pull_lg_val" autocomplete="off" min="1" max="12")
 
   .row
     .col-xs-12
@@ -311,11 +198,7 @@ mixin layer_row_col_tmpl(LAYERS_ID, active=false)
   .panel.panel-default.layer-row-col(data-layer-row-col-number!="<%= col_num %>")
     .panel-heading(role="tab")
       .pull-right.row-button
-        button.btn.btn-danger.btn-xs.delete-layer-row-col(
-          data-toggle="tooltip"
-          title="Delete Col"
-          data-col-name!="Col <%= col_num %>"
-        )
+        button.btn.btn-danger.btn-xs.delete-layer-row-col(data-toggle="tooltip" title="Delete Col" data-col-name!="Col <%= col_num %>")
           span.glyphicon.glyphicon-trash
 
       h4.panel-title
@@ -330,11 +213,7 @@ mixin layer_row_col_tmpl(LAYERS_ID, active=false)
           |
           | Col <%= col_num %>
 
-    .panel-collapse.collapse(
-      role="tabpanel"
-      id!=COL_ID
-      class=active ? "in" : ""
-    )
+    .panel-collapse.collapse(role="tabpanel" id!=COL_ID class=active ? "in" : "")
       .panel-body
         - var COL_ID = COL_ID + "-content";
         +layer_row_col_content_tmpl(COL_ID)
@@ -359,246 +238,141 @@ mixin layer_row_col_content_tmpl(COL_ID)
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name!=COL_ID + "-option_offset"
-              )
+              input(type="checkbox" name!=COL_ID + "-option_offset")
               | Offset
 
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name!=COL_ID + "-option_push_pull"
-              )
+              input(type="checkbox" name!=COL_ID + "-option_push_pull")
               | Push Pull
 
         .item
           .checkbox.no-margin-top
             label
-              input(
-                type="checkbox"
-                name!=COL_ID + "-option_nesting_column"
-              )
+              input(type="checkbox" name!=COL_ID + "-option_nesting_column")
               | Nesting Column
 
   .row
     .col-xs-4
       h4.no-margin-bottom Column
+
       .column-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-column_col_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-column_col_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-column_col_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-column_col_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-column_col_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-column_col_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-column_col_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-column_col_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-column_col_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-column_col_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name="col-md-val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name="col-md-val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-column_col_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-column_col_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-column_col_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-column_col_lg_val" autocomplete="off" min="1" max="12")
 
     .col-xs-4
       h4.no-margin-bottom Offset
+
       .offset-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-offset_col_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-offset_col_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-offset_col_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-offset_col_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-offset_col_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-offset_col_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-offset_col_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-offset_col_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-offset_col_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-offset_col_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-offset_col_md_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-offset_col_md_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-offset_col_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-offset_col_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-offset_col_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-offset_col_lg_val" autocomplete="off" min="1" max="12")
 
     .col-xs-4
       h4.no-margin-bottom Push Pull
+
       .push-pull-choices
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-push-pull_col_xs"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-push-pull_col_xs" autocomplete="off")
                 | xs
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-push-pull_col_xs_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-push-pull_col_xs_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-push-pull_col_sm"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-push-pull_col_sm" autocomplete="off")
                 | sm
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-push-pull_col_sm_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-push-pull_col_sm_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-push-pull_col_md"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-push-pull_col_md" autocomplete="off")
                 | md
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-push-pull_col_md_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-push-pull_col_md_val" autocomplete="off" min="1" max="12")
+
         .input-group
           .input-group-btn
             .btn-group(data-toggle="buttons")
               label.btn.btn-default.btn-xs
-                input(
-                  type="checkbox"
-                  name!=COL_ID + "-push-pull_col_lg"
-                  autocomplete="off"
-                )
+                input(type="checkbox" name!=COL_ID + "-push-pull_col_lg" autocomplete="off")
                 | lg
-          input.form-control(
-            type="number"
-            name!=COL_ID + "-push-pull_col_lg_val"
-            autocomplete="off"
-            min="1"
-            max="12"
-          )
+
+          input.form-control(type="number" name!=COL_ID + "-push-pull_col_lg_val" autocomplete="off" min="1" max="12")
 
   .row
     .col-xs-12
