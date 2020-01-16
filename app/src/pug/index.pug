@@ -16,40 +16,40 @@ html(lang="en")
   body
     include bs3-editor.pug
 
-    .playground.show-grid#playground
-      .container-fluid
-        .grid-info
-          span.label.label-primary Layer 1
+    .playground#playground
+      //- .container-fluid(data-name="Layer 1")
+      //-   //- .grid-info
+      //-   //-   span.label.label-primary Layer 1
 
-        .row
-          .grid-info
-            span.label.label-info Row 1
+      //-   .row(data-name="Row 1")
+      //-     .grid-info
+      //-       span.label.label-info Row 1
 
-          .col-md-12
-            .grid-info
-              span.label.label-success Col 1
+      //-     .col-md-12(data-name="Col 1")
+      //-       .grid-info
+      //-         span.label.label-success Col 1
 
-            h1.page-header Hello World
+      //-       h1.page-header Hello World
 
-            .row
-              .grid-info
-                span.label.label-info Row 1-1
+      //-       .row
+      //-         .grid-info
+      //-           span.label.label-info Row 1-1
 
-              .col-md-3
-                .grid-info
-                  span.label.label-success Col 3
+      //-         .col-md-3
+      //-           .grid-info
+      //-             span.label.label-success Col 3
 
-              .col-md-3
-                .grid-info
-                  span.label.label-success Col 3
+      //-         .col-md-3
+      //-           .grid-info
+      //-             span.label.label-success Col 3
 
-              .col-md-3
-                .grid-info
-                  span.label.label-success Col 3
+      //-         .col-md-3
+      //-           .grid-info
+      //-             span.label.label-success Col 3
 
-              .col-md-3
-                .grid-info
-                  span.label.label-success Col 3
+      //-         .col-md-3
+      //-           .grid-info
+      //-             span.label.label-success Col 3
 
     - var LAYERS_ID = "bs3-ed-layers";
     script(type="text/template" id="layer-tmpl")
@@ -61,7 +61,25 @@ html(lang="en")
     script(type="text/template" id="layer-row-col-tmpl")
       +layer_row_col_tmpl(LAYERS_ID)
 
-    script(type="text-template" id="")
+    script(type="text-template" id="container-tmpl")
+      div(class!="container<%= (typeof fluid !== undefined) ? '-fluid' : '' %> pg-layer" data-name!="Layer <%= num %>")
+
+    script(type="text-template" id="row-tmpl")
+      .row(data-name!="Row <%= num %>")
+
+    script(type="text-template" id="grid-info-tmpl")
+      .grid-info
+        <% var CONTAINER = "container"; %>
+        <% var ROW = "row"; %>
+        <% var COL = "col"; %>
+
+        <% if(block.toLowerCase() === CONTAINER) { %>
+          span.label.label-primary <%= content %>
+        <% } else if (block.toLowerCase() === ROW) { %>
+          span.label.label-info <%= content %>
+        <% } else if (block.toLowerCase() === COL) { %>
+          span.label.label-success <%= content %>
+        <% } %>
 
     // build:js js/app.js
     script(type="text/javascript" src="./lib/node_modules/jquery/dist/jquery.js")

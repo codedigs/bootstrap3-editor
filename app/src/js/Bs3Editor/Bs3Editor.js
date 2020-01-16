@@ -18,6 +18,14 @@ Bs3Editor.init = function() {
     layer.init(editorEl, layersEl);
     layerRow.init(layersEl);
     layerRowCol.init(layersEl);
+
+    $('input[name="show_grid"]', editorEl).click(Bs3Editor.eventListeners.onShowGrid);
+  }
+};
+
+Bs3Editor.eventListeners = {
+  onShowGrid: function() {
+    $('#playground')[$(this).is(":checked") ? "addClass" : "removeClass"]("show-grid");
   }
 };
 

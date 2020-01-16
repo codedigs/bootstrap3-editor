@@ -1,0 +1,53 @@
+.playground {
+  border: 1px solid black;
+  margin: 15px 0;
+
+  &.show-grid {
+    .grid-info {
+      height: 14px;
+      position: relative;
+      top: -6px;
+
+      .label {
+        border-radius: 0;
+        font-size: 58%;
+      }
+    }
+
+    $RANGE: 2px;
+
+    .container,
+    .container-fluid {
+      border: 2px solid blue;
+      border-top-width: 1px;
+
+      & > .grid-info {
+        left: -15px;
+      }
+
+      .row {
+        border: 2px solid red;
+        border-top-width: 1px;
+
+        & > .grid-info {
+          left: $RANGE;
+        }
+
+        [class^=col-] {
+          border: 2px solid green;
+          border-top-width: 1px;
+
+          & > .grid-info {
+            left: -15px + ($RANGE*2);
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.show-grid) {
+    .grid-info {
+      display: none;
+    }
+  }
+}

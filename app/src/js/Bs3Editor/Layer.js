@@ -43,49 +43,72 @@ Layer.eventListeners = {
   onAdd: function() {
     var _this = this;
 
-    var before = function() {
-      $(_this).prop("disabled", true);
+    var editor = function() {
 
-      var hasLayer = $('.layer', Layer.layersEl).length > 0;
+      var before = function() {
+        $(_this).prop("disabled", true);
 
-      if (hasLayer) {
-        $(_this).prop("disabled", false);
-        during();
-      } else {
-        $(_this).animate({ // animate the button
-          width: 24
-        }, Layer.TRANSITION, function() {
-          $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+        var hasLayer = $('.layer', Layer.layersEl).length > 0;
+
+        if (hasLayer) {
           $(_this).prop("disabled", false);
-          $(_this).tooltip({
-            title: "Add Layer"
-          });
-
           during();
-        });
-      }
+        } else {
+          $(_this).animate({ // animate the button
+            width: 24
+          }, Layer.TRANSITION, function() {
+            $(_this).html('<span class="glyphicon glyphicon-plus"></span>');
+            $(_this).prop("disabled", false);
+            $(_this).tooltip({
+              title: "Add Layer"
+            });
 
-      // remove tooltip
-      $(_this).tooltip("hide");
+            during();
+          });
+        }
+
+        // remove tooltip
+        $(_this).tooltip("hide");
+      };
+
+      var during = function() {
+        var tmpl = _.template($('#layer-tmpl').html());
+
+        Layer.incrementCounter();
+        Layer.layersEl.append(tmpl({
+          layer_num: Layer.getCounter(),
+          // layer_content: "Lorem ipsum"
+        }));
+
+        // initialize tooltip on new layer
+        $('.delete-layer:last[data-toggle="tooltip"]', Layer.layersEl).tooltip();
+
+        // open new layer
+        $('.layer .layer-btn:last', Layer.layersEl).click();
+
+        playground();
+      };
+
+      before();
     };
 
-    var during = function() {
-      var tmpl = _.template($('#layer-tmpl').html());
+    var playground = function() {
+      var tmpl = _.template($('#container-tmpl').html());
+      var pgEl = $('#playground');
+      var layer_num = Layer.getCounter();
 
-      Layer.incrementCounter();
-      Layer.layersEl.append(tmpl({
-        layer_num: Layer.getCounter(),
-        // layer_content: "Lorem ipsum"
+      pgEl.append(tmpl({
+        num: layer_num
       }));
 
-      // initialize tooltip on new layer
-      $('.delete-layer:last[data-toggle="tooltip"]', Layer.layersEl).tooltip();
-
-      // open new layer
-      $('.layer .layer-btn:last', Layer.layersEl).click();
+      var gridInfoTmpl = _.template($('#grid-info-tmpl').html());
+      $('> .pg-layer:last', pgEl).prepend(gridInfoTmpl({
+        block: "container",
+        content: "Layer " + layer_num
+      }));
     };
 
-    before();
+    editor();
   },
 
   onDelete: function() {
